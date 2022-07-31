@@ -26,6 +26,8 @@ To load the DB, press on `DB -> Load DB...` and choose your DB. You can a DB we 
 
 https://user-images.githubusercontent.com/11998736/165285471-e143eebd-bfbf-49a2-8e70-107f083c60fc.mp4
 
+## Credit
+We want to thank James Forshaw ([@tyranid](https://github.com/tyranid)) for creating the open source [NtApiDotNet](https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/main/NtApiDotNet) which allowed us to get the RPC functions.  
 
 ## License
 Copyright (c) 2022 CyberArk Software Ltd. All rights reserved  
