@@ -1,0 +1,314 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events>
+      <provider name="Microsoft-Windows-RPC" guid="{6ad52b32-d609-4be9-ae07-ce8dae937e39}" resourceFileName="Microsoft-Windows-RPC" messageFileName="Microsoft-Windows-RPC" symbol="MicrosoftWindowsRPC" source="Xml">
+        <keywords></keywords>
+        <tasks>
+          <task name="task_0" message="$(string.task_task_0)" value="0" />
+          <task name="RpcClientCall" message="$(string.task_RpcClientCall)" value="1" />
+          <task name="RpcServerCall" message="$(string.task_RpcServerCall)" value="2" />
+          <task name="Debug" message="$(string.task_Debug)" value="3" />
+          <task name="FunctionTrace" message="$(string.task_FunctionTrace)" value="4" />
+        </tasks>
+        <maps>
+          <valueMap name="SubjectTypes">
+            <map value="0x2e" message="$(string.map_SubjectTypesASSOC)" />
+            <map value="0x32" message="$(string.map_SubjectTypesHTTPv2)" />
+            <map value="0x41" message="$(string.map_SubjectTypesSASSOC)" />
+            <map value="0x42" message="$(string.map_SubjectTypesBCACHE2)" />
+            <map value="0x43" message="$(string.map_SubjectTypesSCALL)" />
+            <map value="0x44" message="$(string.map_SubjectTypesADDRESS)" />
+            <map value="0x45" message="$(string.map_SubjectTypesENGINE)" />
+            <map value="0x46" message="$(string.map_SubjectTypesCAUSAL_F)" />
+            <map value="0x47" message="$(string.map_SubjectTypesGC)" />
+            <map value="0x48" message="$(string.map_SubjectTypesHEAP)" />
+            <map value="0x49" message="$(string.map_SubjectTypesEEINFO)" />
+            <map value="0x4c" message="$(string.map_SubjectTypesALPC)" />
+            <map value="0x4d" message="$(string.map_SubjectTypesRESERVED_MEM)" />
+            <map value="0x4e" message="$(string.map_SubjectTypesSCONN)" />
+            <map value="0x4f" message="$(string.map_SubjectTypesCORRUPT)" />
+            <map value="0x50" message="$(string.map_SubjectTypesPROVIDER)" />
+            <map value="0x53" message="$(string.map_SubjectTypesSECCRED)" />
+            <map value="0x54" message="$(string.map_SubjectTypesSTABLE)" />
+            <map value="0x57" message="$(string.map_SubjectTypesPROTOCOL)" />
+            <map value="0x61" message="$(string.map_SubjectTypesCASSOC)" />
+            <map value="0x62" message="$(string.map_SubjectTypesBCACHE)" />
+            <map value="0x63" message="$(string.map_SubjectTypesCCALL)" />
+            <map value="0x64" message="$(string.map_SubjectTypesTP_ALPC)" />
+            <map value="0x65" message="$(string.map_SubjectTypesCENDPOINT)" />
+            <map value="0x66" message="$(string.map_SubjectTypesTP_CALLBACK)" />
+            <map value="0x68" message="$(string.map_SubjectTypesHANDLE)" />
+            <map value="0x69" message="$(string.map_SubjectTypesIF)" />
+            <map value="0x6a" message="$(string.map_SubjectTypesTP_IO)" />
+            <map value="0x6b" message="$(string.map_SubjectTypesTP_WORK)" />
+            <map value="0x6c" message="$(string.map_SubjectTypesCTXHANDLE)" />
+            <map value="0x6d" message="$(string.map_SubjectTypesMUTEX)" />
+            <map value="0x6e" message="$(string.map_SubjectTypesCCONN)" />
+            <map value="0x6f" message="$(string.map_SubjectTypesTRANS_CONN)" />
+            <map value="0x70" message="$(string.map_SubjectTypesPACKET)" />
+            <map value="0x72" message="$(string.map_SubjectTypesREFOBJ)" />
+            <map value="0x73" message="$(string.map_SubjectTypesSSECCTX)" />
+            <map value="0x74" message="$(string.map_SubjectTypesTHREAD)" />
+            <map value="0x75" message="$(string.map_SubjectTypesTP_TIMER)" />
+            <map value="0x76" message="$(string.map_SubjectTypesEVENT)" />
+            <map value="0x77" message="$(string.map_SubjectTypesTP_WAIT)" />
+            <map value="0x78" message="$(string.map_SubjectTypesEXCEPT)" />
+          </valueMap>
+          <valueMap name="ProtocolSequences">
+            <map value="0x1" message="$(string.map_ProtocolSequencesTCP)" />
+            <map value="0x2" message="$(string.map_ProtocolSequencesNamed Pipes)" />
+            <map value="0x3" message="$(string.map_ProtocolSequencesLRPC)" />
+            <map value="0x4" message="$(string.map_ProtocolSequencesRPC/HTTP)" />
+          </valueMap>
+          <valueMap name="AuthenticationServices">
+            <map value="0x9" message="$(string.map_AuthenticationServicesNegotiate)" />
+            <map value="0xa" message="$(string.map_AuthenticationServicesNTLM)" />
+            <map value="0xe" message="$(string.map_AuthenticationServicesSChannel)" />
+            <map value="0x10" message="$(string.map_AuthenticationServicesKerberos)" />
+            <map value="0x14" message="$(string.map_AuthenticationServicesKernel)" />
+          </valueMap>
+          <valueMap name="ImpersonationLevels">
+            <map value="0x0" message="$(string.map_ImpersonationLevelsDefault)" />
+            <map value="0x1" message="$(string.map_ImpersonationLevelsAnonymous)" />
+            <map value="0x2" message="$(string.map_ImpersonationLevelsIdentify)" />
+            <map value="0x3" message="$(string.map_ImpersonationLevelsImpersonate)" />
+            <map value="0x4" message="$(string.map_ImpersonationLevelsDelegate)" />
+          </valueMap>
+          <valueMap name="RpcHttp2ObjectTypes">
+            <map value="0x1" message="$(string.map_RpcHttp2ObjectTypesSOCKET_CHANNEL)" />
+            <map value="0x2" message="$(string.map_RpcHttp2ObjectTypesPROXY_SOCKET_CHANNEL)" />
+            <map value="0x3" message="$(string.map_RpcHttp2ObjectTypesCHANNEL)" />
+            <map value="0x4" message="$(string.map_RpcHttp2ObjectTypesBOTTOM_CHANNEL)" />
+            <map value="0x5" message="$(string.map_RpcHttp2ObjectTypesIIS_CHANNEL)" />
+            <map value="0x6" message="$(string.map_RpcHttp2ObjectTypesRAW_CONNECTION)" />
+            <map value="0x7" message="$(string.map_RpcHttp2ObjectTypesINITIAL_RAW_CONNECTION)" />
+            <map value="0x8" message="$(string.map_RpcHttp2ObjectTypesIIS_SENDER_CHANNEL)" />
+            <map value="0x9" message="$(string.map_RpcHttp2ObjectTypesENDPOINT_RECEIVER)" />
+            <map value="0xa" message="$(string.map_RpcHttp2ObjectTypesPLUG_CHANNEL)" />
+            <map value="0xb" message="$(string.map_RpcHttp2ObjectTypesCLIENT_VC)" />
+            <map value="0xc" message="$(string.map_RpcHttp2ObjectTypesSERVER_VC)" />
+            <map value="0xd" message="$(string.map_RpcHttp2ObjectTypesINPROXY_VC)" />
+            <map value="0xe" message="$(string.map_RpcHttp2ObjectTypesOUTPROXY_VC)" />
+            <map value="0xf" message="$(string.map_RpcHttp2ObjectTypesPROXY_VC)" />
+            <map value="0x10" message="$(string.map_RpcHttp2ObjectTypesCDATA_ORIGINATOR)" />
+            <map value="0x11" message="$(string.map_RpcHttp2ObjectTypesCLIENT_CHANNEL)" />
+            <map value="0x12" message="$(string.map_RpcHttp2ObjectTypesCALLBACK)" />
+            <map value="0x13" message="$(string.map_RpcHttp2ObjectTypesFLOW_CONTROL_SENDER)" />
+            <map value="0x14" message="$(string.map_RpcHttp2ObjectTypesWINHTTP_CALLBACK)" />
+            <map value="0x15" message="$(string.map_RpcHttp2ObjectTypesWINHTTP_CHANNEL)" />
+            <map value="0x16" message="$(string.map_RpcHttp2ObjectTypesWINHTTP_RAW)" />
+            <map value="0x17" message="$(string.map_RpcHttp2ObjectTypesPROXY_RECEIVER)" />
+            <map value="0x18" message="$(string.map_RpcHttp2ObjectTypesSERVER_CHANNEL)" />
+            <map value="0x19" message="$(string.map_RpcHttp2ObjectTypesFRAGMENT_RECEIVER)" />
+          </valueMap>
+        </maps>
+        <events>
+          <event value="1" symbol="RpcClientCallStop_V1" version="1" task="RpcClientCall" opcode="win:Stop" level="win:Error" template="RpcClientCallStopArgs_V1" />
+          <event value="2" symbol="RpcServerCall_V1" version="1" task="RpcServerCall" level="win:Informational" template="RpcServerCallArgs_V1" />
+          <event value="3" symbol="task_0_V1" version="1" task="task_0" level="win:Error" template="task_0Args_V1" />
+          <event value="4" symbol="Debug_V1" version="1" task="Debug" level="win:Verbose" template="DebugArgs_V1" />
+          <event value="5" symbol="RpcClientCallStart_V1" version="1" task="RpcClientCall" opcode="win:Start" level="win:Informational" template="RpcClientCallStartArgs_V1" />
+          <event value="6" symbol="RpcServerCallStart_V1" version="1" task="RpcServerCall" opcode="win:Start" level="win:Informational" template="RpcServerCallStartArgs_V1" />
+          <event value="7" symbol="RpcClientCallStop7_V1" version="1" task="RpcClientCall" opcode="win:Stop" level="win:Informational" template="RpcClientCallStop7Args_V1" />
+          <event value="8" symbol="RpcServerCallStop_V1" version="1" task="RpcServerCall" opcode="win:Stop" level="win:Informational" template="RpcClientCallStop7Args_V1" />
+          <event value="9" symbol="task_09_V1" version="1" task="task_0" level="win:Verbose" template="RpcClientCallStop7Args_V1" />
+          <event value="10" symbol="Debug10_V1" version="1" task="Debug" level="win:Verbose" template="Debug10Args_V1" />
+          <event value="11" symbol="Debug11_V1" version="1" task="Debug" level="win:Verbose" template="Debug10Args_V1" />
+          <event value="12" symbol="DebugStart_V1" version="1" task="Debug" opcode="win:Start" level="win:Verbose" template="DebugStartArgs_V1" />
+          <event value="13" symbol="DebugStop_V1" version="1" task="Debug" opcode="win:Stop" level="win:Verbose" template="DebugStopArgs_V1" />
+          <event value="14" symbol="FunctionTraceStart_V1" version="1" task="FunctionTrace" opcode="win:Start" level="win:Informational" template="FunctionTraceStartArgs_V1" />
+          <event value="15" symbol="FunctionTraceStop_V1" version="1" task="FunctionTrace" opcode="win:Stop" level="win:Informational" template="FunctionTraceStopArgs_V1" />
+          <event value="16" symbol="FunctionTraceStart16_V1" version="1" task="FunctionTrace" opcode="win:Start" level="win:Informational" template="FunctionTraceStart16Args_V1" />
+        </events>
+        <templates>
+          <template tid="RpcClientCallStopArgs_V1">
+            <data name="ImageName" inType="win:UnicodeString" />
+            <data name="ComputerName" inType="win:UnicodeString" />
+            <data name="ProcessID" inType="win:UInt32" />
+            <data name="TimeStamp" inType="win:SYSTEMTIME" />
+            <data name="GeneratingComponent" inType="win:UInt32" />
+            <data name="Status" inType="win:HexInt32" />
+            <data name="DetectionLocation" inType="win:UInt16" />
+            <data name="Flags" inType="win:UInt16" />
+            <data name="NumberOfParameters" inType="win:UInt16" />
+            <data name="Params" inType="win:UInt64" count="NumberOfParameters" />
+          </template>
+          <template tid="RpcServerCallArgs_V1">
+            <data name="ImangeName" inType="win:UnicodeString" />
+            <data name="InterfaceUuid" inType="win:GUID" />
+            <data name="FilterKey" inType="win:GUID" />
+          </template>
+          <template tid="task_0Args_V1">
+            <data name="ImageName" inType="win:UnicodeString" />
+            <data name="DetectionLocation" inType="win:UInt16" />
+            <data name="Status" inType="win:UInt32" />
+            <data name="AdditionalData1" inType="win:HexInt32" />
+            <data name="AdditionalData2" inType="win:HexInt32" />
+          </template>
+          <template tid="DebugArgs_V1">
+            <data name="Subject" inType="win:UInt8" map="SubjectTypes" />
+            <data name="Verb" inType="win:UInt8" />
+            <data name="SubjectPointer" inType="win:UInt64" />
+            <data name="ObjectPointer" inType="win:UInt64" />
+            <data name="DataPointer" inType="win:UInt64" />
+          </template>
+          <template tid="RpcClientCallStartArgs_V1">
+            <data name="InterfaceUuid" inType="win:GUID" />
+            <data name="ProcNum" inType="win:UInt32" />
+            <data name="Protocol" inType="win:UInt32" map="ProtocolSequences" />
+            <data name="NetworkAddress" inType="win:UnicodeString" />
+            <data name="Endpoint" inType="win:UnicodeString" />
+            <data name="Options" inType="win:UnicodeString" />
+            <data name="AuthenticationLevel" inType="win:UInt32" />
+            <data name="AuthenticationService" inType="win:UInt32" map="AuthenticationServices" />
+            <data name="ImpersonationLevel" inType="win:UInt32" />
+          </template>
+          <template tid="RpcServerCallStartArgs_V1">
+            <data name="InterfaceUuid" inType="win:GUID" />
+            <data name="ProcNum" inType="win:UInt32" />
+            <data name="Protocol" inType="win:UInt32" />
+            <data name="NetworkAddress" inType="win:UnicodeString" />
+            <data name="Endpoint" inType="win:UnicodeString" />
+            <data name="Options" inType="win:UnicodeString" />
+            <data name="AuthenticationLevel" inType="win:UInt32" />
+            <data name="AuthenticationService" inType="win:UInt32" />
+            <data name="ImpersonationLevel" inType="win:UInt32" map="ImpersonationLevels" />
+          </template>
+          <template tid="RpcClientCallStop7Args_V1">
+            <data name="Status" inType="win:UInt32" />
+          </template>
+          <template tid="Debug10Args_V1">
+            <data name="SubjectPointer" inType="win:UInt64" />
+            <data name="FragmentSize" inType="win:UInt32" />
+            <data name="Fragment" inType="win:Binary" length="FragmentSize" />
+          </template>
+          <template tid="DebugStartArgs_V1">
+            <data name="ObjectType" inType="win:UInt32" />
+            <data name="Operation" inType="win:UInt32" />
+            <data name="Address" inType="win:UInt64" />
+            <data name="Data" inType="win:UInt64" />
+          </template>
+          <template tid="DebugStopArgs_V1">
+            <data name="ObjectType" inType="win:UInt32" map="RpcHttp2ObjectTypes" />
+            <data name="Operation" inType="win:UInt32" />
+            <data name="Address" inType="win:UInt64" />
+            <data name="Data" inType="win:UInt64" />
+          </template>
+          <template tid="FunctionTraceStartArgs_V1">
+            <data name="InterfaceUuid" inType="win:GUID" />
+            <data name="TypeMgrUuid" inType="win:GUID" />
+            <data name="Flags" inType="win:UInt32" />
+            <data name="MaxCalls" inType="win:UInt32" />
+            <data name="SDSize" inType="win:UInt32" />
+            <data name="SD" inType="win:Binary" length="SDSize" />
+          </template>
+          <template tid="FunctionTraceStopArgs_V1">
+            <data name="InterfaceUuid" inType="win:GUID" />
+            <data name="TypeMgrUuid" inType="win:GUID" />
+            <data name="Flags" inType="win:UInt32" />
+            <data name="MaxCalls" inType="win:UInt32" />
+          </template>
+          <template tid="FunctionTraceStart16Args_V1">
+            <data name="Protocol" inType="win:UnicodeString" />
+            <data name="Endpoint" inType="win:UnicodeString" />
+            <data name="NetworkAddress" inType="win:UnicodeString" />
+            <data name="PendingQueueSize" inType="win:UInt32" />
+            <data name="EndpointFlags" inType="win:UInt32" />
+            <data name="NicFlags" inType="win:UInt32" />
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-IL">
+      <stringTable>
+        <string id="task_task_0" value="task_0" />
+        <string id="task_RpcClientCall" value="RpcClientCall" />
+        <string id="task_RpcServerCall" value="RpcServerCall" />
+        <string id="task_Debug" value="Debug" />
+        <string id="task_FunctionTrace" value="FunctionTrace" />
+        <string id="map_SubjectTypesASSOC" value="ASSOC" />
+        <string id="map_SubjectTypesHTTPv2" value="HTTPv2" />
+        <string id="map_SubjectTypesSASSOC" value="SASSOC" />
+        <string id="map_SubjectTypesBCACHE2" value="BCACHE2" />
+        <string id="map_SubjectTypesSCALL" value="SCALL" />
+        <string id="map_SubjectTypesADDRESS" value="ADDRESS" />
+        <string id="map_SubjectTypesENGINE" value="ENGINE" />
+        <string id="map_SubjectTypesCAUSAL_F" value="CAUSAL_F" />
+        <string id="map_SubjectTypesGC" value="GC" />
+        <string id="map_SubjectTypesHEAP" value="HEAP" />
+        <string id="map_SubjectTypesEEINFO" value="EEINFO" />
+        <string id="map_SubjectTypesALPC" value="ALPC" />
+        <string id="map_SubjectTypesRESERVED_MEM" value="RESERVED_MEM" />
+        <string id="map_SubjectTypesSCONN" value="SCONN" />
+        <string id="map_SubjectTypesCORRUPT" value="CORRUPT" />
+        <string id="map_SubjectTypesPROVIDER" value="PROVIDER" />
+        <string id="map_SubjectTypesSECCRED" value="SECCRED" />
+        <string id="map_SubjectTypesSTABLE" value="STABLE" />
+        <string id="map_SubjectTypesPROTOCOL" value="PROTOCOL" />
+        <string id="map_SubjectTypesCASSOC" value="CASSOC" />
+        <string id="map_SubjectTypesBCACHE" value="BCACHE" />
+        <string id="map_SubjectTypesCCALL" value="CCALL" />
+        <string id="map_SubjectTypesTP_ALPC" value="TP_ALPC" />
+        <string id="map_SubjectTypesCENDPOINT" value="CENDPOINT" />
+        <string id="map_SubjectTypesTP_CALLBACK" value="TP_CALLBACK" />
+        <string id="map_SubjectTypesHANDLE" value="HANDLE" />
+        <string id="map_SubjectTypesIF" value="IF" />
+        <string id="map_SubjectTypesTP_IO" value="TP_IO" />
+        <string id="map_SubjectTypesTP_WORK" value="TP_WORK" />
+        <string id="map_SubjectTypesCTXHANDLE" value="CTXHANDLE" />
+        <string id="map_SubjectTypesMUTEX" value="MUTEX" />
+        <string id="map_SubjectTypesCCONN" value="CCONN" />
+        <string id="map_SubjectTypesTRANS_CONN" value="TRANS_CONN" />
+        <string id="map_SubjectTypesPACKET" value="PACKET" />
+        <string id="map_SubjectTypesREFOBJ" value="REFOBJ" />
+        <string id="map_SubjectTypesSSECCTX" value="SSECCTX" />
+        <string id="map_SubjectTypesTHREAD" value="THREAD" />
+        <string id="map_SubjectTypesTP_TIMER" value="TP_TIMER" />
+        <string id="map_SubjectTypesEVENT" value="EVENT" />
+        <string id="map_SubjectTypesTP_WAIT" value="TP_WAIT" />
+        <string id="map_SubjectTypesEXCEPT" value="EXCEPT" />
+        <string id="map_ProtocolSequencesTCP" value="TCP" />
+        <string id="map_ProtocolSequencesNamed Pipes" value="Named Pipes" />
+        <string id="map_ProtocolSequencesLRPC" value="LRPC" />
+        <string id="map_ProtocolSequencesRPC/HTTP" value="RPC/HTTP" />
+        <string id="map_AuthenticationServicesNegotiate" value="Negotiate" />
+        <string id="map_AuthenticationServicesNTLM" value="NTLM" />
+        <string id="map_AuthenticationServicesSChannel" value="SChannel" />
+        <string id="map_AuthenticationServicesKerberos" value="Kerberos" />
+        <string id="map_AuthenticationServicesKernel" value="Kernel" />
+        <string id="map_ImpersonationLevelsDefault" value="Default" />
+        <string id="map_ImpersonationLevelsAnonymous" value="Anonymous" />
+        <string id="map_ImpersonationLevelsIdentify" value="Identify" />
+        <string id="map_ImpersonationLevelsImpersonate" value="Impersonate" />
+        <string id="map_ImpersonationLevelsDelegate" value="Delegate" />
+        <string id="map_RpcHttp2ObjectTypesSOCKET_CHANNEL" value="SOCKET_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesPROXY_SOCKET_CHANNEL" value="PROXY_SOCKET_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesCHANNEL" value="CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesBOTTOM_CHANNEL" value="BOTTOM_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesIIS_CHANNEL" value="IIS_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesRAW_CONNECTION" value="RAW_CONNECTION" />
+        <string id="map_RpcHttp2ObjectTypesINITIAL_RAW_CONNECTION" value="INITIAL_RAW_CONNECTION" />
+        <string id="map_RpcHttp2ObjectTypesIIS_SENDER_CHANNEL" value="IIS_SENDER_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesENDPOINT_RECEIVER" value="ENDPOINT_RECEIVER" />
+        <string id="map_RpcHttp2ObjectTypesPLUG_CHANNEL" value="PLUG_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesCLIENT_VC" value="CLIENT_VC" />
+        <string id="map_RpcHttp2ObjectTypesSERVER_VC" value="SERVER_VC" />
+        <string id="map_RpcHttp2ObjectTypesINPROXY_VC" value="INPROXY_VC" />
+        <string id="map_RpcHttp2ObjectTypesOUTPROXY_VC" value="OUTPROXY_VC" />
+        <string id="map_RpcHttp2ObjectTypesPROXY_VC" value="PROXY_VC" />
+        <string id="map_RpcHttp2ObjectTypesCDATA_ORIGINATOR" value="CDATA_ORIGINATOR" />
+        <string id="map_RpcHttp2ObjectTypesCLIENT_CHANNEL" value="CLIENT_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesCALLBACK" value="CALLBACK" />
+        <string id="map_RpcHttp2ObjectTypesFLOW_CONTROL_SENDER" value="FLOW_CONTROL_SENDER" />
+        <string id="map_RpcHttp2ObjectTypesWINHTTP_CALLBACK" value="WINHTTP_CALLBACK" />
+        <string id="map_RpcHttp2ObjectTypesWINHTTP_CHANNEL" value="WINHTTP_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesWINHTTP_RAW" value="WINHTTP_RAW" />
+        <string id="map_RpcHttp2ObjectTypesPROXY_RECEIVER" value="PROXY_RECEIVER" />
+        <string id="map_RpcHttp2ObjectTypesSERVER_CHANNEL" value="SERVER_CHANNEL" />
+        <string id="map_RpcHttp2ObjectTypesFRAGMENT_RECEIVER" value="FRAGMENT_RECEIVER" />
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>
