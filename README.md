@@ -7,7 +7,7 @@ The tool was published as part of a research on RPC communication between the ho
 
 ## Overview
 RPCMon can help researchers to get a high level view over an RPC communication between processes. It was built like Procmon for easy usage, and uses James Forshaw .NET library for RPC. RPCMon can show you the RPC functions being called, the process who called them, and other relevant information.  
-RPCMon uses a hardcoded RPC dictionary for fast RPC information processing which contains information about RPC modules. It also have an option to build an RPC database so it will be updated from your computer in case some details are missing in the hardcoded RPC dictionary. 
+RPCMon uses a hardcoded RPC dictionary for fast RPC information processing which contains information about RPC modules. It also has an option to build an RPC database so it will be updated from your computer in case some details are missing in the hardcoded RPC dictionary. 
 
 
 ## Usage
