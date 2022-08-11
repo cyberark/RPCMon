@@ -1,5 +1,5 @@
-[![GitHub release][release-img]][release]
-[![License][license-img]][license]
+<!---[![GitHub release][release-img]][release]
+[![License][license-img]][license]-->
 
  <img src="https://github.com/cyberark/RPCMon/blob/assets/RPCMonLogo.png" width="260">   
 A GUI tool for scanning RPC communication through Event Tracing for Windows (ETW).  
