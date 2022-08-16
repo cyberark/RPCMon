@@ -1,5 +1,6 @@
-<!---[![GitHub release][release-img]][release]
-[![License][license-img]][license]-->
+[![GitHub release][release-img]][release]
+[![License][license-img]][license]
+![Downloads][download]
 
  <img src="https://github.com/cyberark/RPCMon/blob/assets/RPCMonLogo.png" width="260">   
 A GUI tool for scanning RPC communication through Event Tracing for Windows (ETW).  
@@ -42,3 +43,5 @@ For more comments, suggestions or questions, you can contact Eviatar Gerzi ([@g3
 
 [license-img]: https://img.shields.io/github/license/cyberark/RPCMon.svg
 [license]: https://github.com/cyberark/RPCMon/blob/master/LICENSE
+
+[download]: https://img.shields.io/github/downloads/cyberark/RPCMon/total?logo=github
