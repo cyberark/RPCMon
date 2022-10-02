@@ -13,7 +13,7 @@ RPCMon uses a hardcoded RPC dictionary for fast RPC information processing which
 
 ## Usage
 
-Double click the EXE binary and you will get the GUI Windows.  
+Double click the EXE binary with **Admin privileges** ("Run As Administrator") and you will get the GUI Windows.  
 RPCMon needs a DB to be able to get the details on the RPC functions, without a DB you will have missing information.   
 To load the DB, press on `DB -> Load DB...` and choose your DB. You can a DB we added to this project: `/DB/RPC_UUID_Map_Windows10_1909_18363.1977.rpcdb.json`.  
 
