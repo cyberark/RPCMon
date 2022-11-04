@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC;
 using RPCMon.Control;
 using System.Reflection;
+using System.Security.Principal;
 
 namespace RPCMon
 {
@@ -38,10 +39,13 @@ namespace RPCMon
         private ListView m_LastListViewColumnFilter = new ListView();
         private ListView m_LastListViewHighlighFilter = new ListView();
         int m_CurrentRowIndexRightClick, m_CurrentColumnIndexRightClick;
+        bool m_IsElevated = false;
 
         public Form1()
         {
             InitializeComponent();
+            configureFormBasedPrivileges();
+
 
             this.m_RPCDBPath = getDBFromCurrentFolder();
             this.toolStripStatusLabelDBPath.Text = "DB File: " + Path.GetFileName(this.m_RPCDBPath);
@@ -83,6 +87,22 @@ namespace RPCMon
                dataGridView1,
                new object[] { true });
         }
+
+        private void configureFormBasedPrivileges()
+        {
+            bool isElevated;
+            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+            {
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                isElevated = principal.IsInRole(WindowsBuiltInRole.Administrator);
+                m_IsElevated = isElevated;
+                if (isElevated)
+                {
+                    this.Text = "RPCMon - RPC Monitor Based Windows Events (Administrator)";
+                }
+            }
+        }
+
 
         private void checkIdDBGHelpExist()
         {
@@ -307,6 +327,7 @@ namespace RPCMon
 
         private void toolStripButtonStart_Click(object sender, EventArgs e)
         {
+
             if (!m_IsCaptureButtonPressed)
             {
                 toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
@@ -324,7 +345,6 @@ namespace RPCMon
                 m_TraceSession.Dispose();
                 m_CaptureThread.Abort();
             }
-
         }
 
         /*private void toolStripButtonStop_Click(object sender, EventArgs e)
@@ -845,7 +865,7 @@ namespace RPCMon
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Authors: Eviatar Gerzi (@g3rzi) and Yaniv Yakobovich\nVersion: 1.0\n\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserved", "About");
+            MessageBox.Show("Authors: Eviatar Gerzi (@g3rzi) and Yaniv Yakobovich\nVersion: 1.1\n\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserved", "About");
         }
 
         private void toolStripButtonFind_Click(object sender, EventArgs e)
