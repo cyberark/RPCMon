@@ -475,22 +475,23 @@ namespace RPCMon
                 startIndex = selectedCell.RowIndex;
             }
 
-            startIndex += 1;
+            startIndex += step;
             for (int i = startIndex; i < dataGridView1.Rows.Count; i+= step)
             {
 
-                if (step + i < 0)
+                if (i < 0)
                 {
                     break;
                 }
 
                 foreach (DataGridViewCell cell in dataGridView1.Rows[i].Cells)
                 {
-                    if (cell.Value != null && cell.Value.ToString().Contains(i_SearchString))
+                    if (dataGridView1.Rows[i].Displayed && cell.Value != null && cell.Value.ToString().Contains(i_SearchString))
                     {
                         cleanAllSelectedCells();
                         dataGridView1.Rows[i].Selected = true;
                         foundMatch = true;
+                        dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[0];
                         break;
                     }
                 }
