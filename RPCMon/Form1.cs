@@ -41,6 +41,11 @@ namespace RPCMon
         int m_CurrentRowIndexRightClick, m_CurrentColumnIndexRightClick;
         bool m_IsElevated = false;
 
+        // ListView i_ListView, Utils.eFormNames i_FormName
+        private ListView highLightListView = null;
+        private Utils.eFormNames highLightFormName;
+       
+
         public Form1()
         {
             InitializeComponent();
@@ -198,20 +203,22 @@ namespace RPCMon
             {
                 m_RPCDB = new Dictionary<string, Dictionary<string, dynamic>>();
             }
+            //filterRowsByFilterRules(highLightListView, highLightFormName);
 
             using (var session = new TraceEventSession("MySimpleSession"))
             {
 
                 m_TraceSession = session;
-
+                
                 session.EnableProvider("Microsoft-Windows-RPC", Microsoft.Diagnostics.Tracing.TraceEventLevel.Verbose);
                 var parser = new MicrosoftWindowsRPCTraceEventParser(session.Source);
-
+                
                 // Do we want to include more events? server events?
 
                 parser.RpcClientCallStart += e2 =>
                 {
                     // addEventToListView(e2);
+                    //filterRowsByFilterRules(highLightListView, highLightFormName);
                     addEventToDataGridView(e2);
                     
                     /* 
@@ -486,7 +493,7 @@ namespace RPCMon
 
                 foreach (DataGridViewCell cell in dataGridView1.Rows[i].Cells)
                 {
-                    if (dataGridView1.Rows[i].Displayed && cell.Value != null && cell.Value.ToString().Contains(i_SearchString))
+                    if (dataGridView1.Rows[i].Visible && cell.Value != null && cell.Value.ToString().Contains(i_SearchString))
                     {
                         cleanAllSelectedCells();
                         dataGridView1.Rows[i].Selected = true;
@@ -571,13 +578,12 @@ namespace RPCMon
             }
         }
 
-        private void filterRowsByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName)
+        private void filterSingleRowByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName, DataGridViewRow row)
         {
-            // TODO: What happens if one row is alrady Filtered\Highlight? It will hide it. Need to fix it
-            // so there will be OR between the rules
-            int rowCounter = 0;
-            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            if (highLightListView == null)
             {
+                    return;
+            }
                 if (rowCounter <= this.dataGridView1.Rows.Count - 1)
                 {
                     foreach (ListViewItem rule in i_ListView.Items)
@@ -660,10 +666,26 @@ namespace RPCMon
                             }
 
                         }
+                        else
+                        {
+                            this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White
+                        }
                     }
                 }
 
                 rowCounter++;
+        }
+
+        private void filterRowsByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName)
+        {
+            // TODO: What happens if one row is alrady Filtered\Highlight? It will hide it. Need to fix it
+            // so there will be OR between the rules
+            highLightListView = i_ListView;
+            highLightFormName = i_FormName;
+            int rowCounter = 0;
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                filterSingleRowByFilterRules(i_ListView, i_FormName, row);
             }
 
             if (i_FormName == Utils.eFormNames.FormColumnFilter)
