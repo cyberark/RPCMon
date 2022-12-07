@@ -47,6 +47,7 @@
             this.toolStripButtonFind = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHighlight = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonGrid = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAutoScroll = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRemoveDuplicate = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,7 +172,8 @@
             this.toolStripButtonFind,
             this.toolStripButtonHighlight,
             this.toolStripButtonGrid,
-            this.toolStripButtonRemoveDuplicate});
+            this.toolStripButtonRemoveDuplicate,
+            this.toolStripButtonAutoScroll});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(828, 27);
@@ -239,6 +241,17 @@
             this.toolStripButtonGrid.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonGrid.Text = "Show Grid";
             this.toolStripButtonGrid.Click += new System.EventHandler(this.toolStripButtonGrid_Click);
+            // 
+            // toolStripButtonAutoScroll
+            // 
+            this.toolStripButtonAutoScroll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAutoScroll.Image = global::RPCMon.Properties.Resources.scroll_disable;
+            this.toolStripButtonAutoScroll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAutoScroll.Name = "toolStripButtonAutoScroll";
+            this.toolStripButtonAutoScroll.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAutoScroll.Text = "Auto Scroll";
+            this.toolStripButtonAutoScroll.ToolTipText = "Auto Scroll";
+            this.toolStripButtonAutoScroll.Click += new System.EventHandler(this.toolStripButtonAutoScroll_Click);
             // 
             // toolStripButtonRemoveDuplicate
             // 
@@ -468,6 +481,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonStart;
         private System.Windows.Forms.ToolStripButton toolStripButtonFilter;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAutoScroll;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonClear;
