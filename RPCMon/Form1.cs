@@ -917,7 +917,7 @@ namespace RPCMon
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Authors: Eviatar Gerzi (@g3rzi) and Yaniv Yakobovich\nVersion: 1.1\n\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserved", "About");
+            MessageBox.Show("Authors: Eviatar Gerzi (@g3rzi) and Yaniv Yakobovich\nVersion: 1.2\n\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserved", "About");
         }
 
         private void toolStripButtonFind_Click(object sender, EventArgs e)
