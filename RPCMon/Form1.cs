@@ -305,7 +305,7 @@ namespace RPCMon
                 }
 
 
-                //TODO: check if cell is visiable
+                //TODO: check if cell is visible
                 if (row.Visible && autoScroll)
                     dataGridView1.FirstDisplayedCell = row.Cells[(int)Utils.eColumnNames.ImpersonationLevel];
                 this.m_TotalNumberOfEvents += 1;
@@ -708,7 +708,7 @@ namespace RPCMon
         private void filterRowsByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName)
         {
             
-            // TODO: What happens if one row is alrady Filtered\Highlight? It will hide it. Need to fix it
+            // TODO: What happens if one row is already Filtered\Highlight? It will hide it. Need to fix it
             // so there will be OR between the rules
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
