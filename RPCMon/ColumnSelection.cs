@@ -14,9 +14,18 @@ namespace RPCMon
     public partial class ColumnSelection : Form
     {
         public event selectColumnsEventHandler selectColumnsUpdate;
-        public ColumnSelection()
+        public ColumnSelection(System.Windows.Forms.DataGridView dataGridView1)
         {
-            InitializeComponent();
+            List<string> visableColumns = new List<string>();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                
+                if (column.Visible)
+                {
+                    visableColumns.Add(column.HeaderText);
+                }
+            }
+            InitializeComponent(visableColumns);
         }
 
         public virtual void OnselectColumnsUpdate(GroupBox i_RPCClient, GroupBox i_RPCServer, GroupBox i_RPCMisc)

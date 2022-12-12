@@ -404,7 +404,7 @@ namespace RPCMon
         private void openColumnSelectionWindow()
         {
             //ColumnFilter columnFilter = new ColumnFilter(listView1);
-            ColumnSelection columnSelection = new ColumnSelection();
+            ColumnSelection columnSelection = new ColumnSelection(dataGridView1);
             columnSelection.selectColumnsUpdate += new selectColumnsEventHandler(this.ColumnSelection_selectColumnsUpdate);
             columnSelection.ShowDialog();
         }
@@ -867,7 +867,11 @@ namespace RPCMon
         /// <param name="e"></param>
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if(e.ColumnIndex.Equals(-1) && e.RowIndex.Equals(-1))
+            {
+                dataGridView1_ColumnHeaderMouseClick(sender, e);
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 m_CurrentRowIndexRightClick = e.RowIndex;
                 m_CurrentColumnIndexRightClick = e.ColumnIndex;
