@@ -44,6 +44,7 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.labelThen = new System.Windows.Forms.Label();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonApply = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -159,7 +160,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(623, 415);
+            this.buttonOK.Location = new System.Drawing.Point(551, 415);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 6;
@@ -170,7 +171,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(713, 415);
+            this.buttonCancel.Location = new System.Drawing.Point(632, 415);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 7;
@@ -221,11 +222,23 @@
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // buttonApply
+            // 
+            this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonApply.Location = new System.Drawing.Point(716, 415);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(75, 23);
+            this.buttonApply.TabIndex = 13;
+            this.buttonApply.Text = "Apply";
+            this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
             // ColumnFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.labelThen);
             this.Controls.Add(this.buttonRemove);
@@ -264,5 +277,6 @@
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Label labelThen;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Button buttonApply;
     }
 }

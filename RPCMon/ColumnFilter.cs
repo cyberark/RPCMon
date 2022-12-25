@@ -20,7 +20,6 @@ namespace RPCMon
         public ColumnFilter(ref ListView i_ListViewColumnFilter)
         {
             InitializeComponentWrapper();
-
             foreach (ListViewItem item in i_ListViewColumnFilter.Items)
             {
                 ListViewItem clonedItem = (ListViewItem)item.Clone();
@@ -30,6 +29,18 @@ namespace RPCMon
 
         public virtual void OnFilterOKUpdate(ListView i_listViewColumnFilter)
         {
+            bool empty = true;
+            foreach(ListViewItem item in i_listViewColumnFilter.Items)
+            {
+                if (item.Checked)
+                {
+                    empty = false;
+                }
+            }
+            if (empty)
+            {
+                i_listViewColumnFilter = new ListView();
+            }
             if (FilterOKUpdate != null)
             {
                 FilterOKUpdate.Invoke(i_listViewColumnFilter);
@@ -53,6 +64,7 @@ namespace RPCMon
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            buttonAdd_Click(sender, e);
             OnFilterOKUpdate(this.listViewColumnFilters);
             this.Close();
         }
@@ -89,7 +101,7 @@ namespace RPCMon
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (!isRowExist(comboBoxSearchByColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text))
+            if (!isRowExist(comboBoxSearchByColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text) && !comboBoxValue.Text.Equals(""))
             {
                 ListViewItem item = new ListViewItem(comboBoxSearchByColumn.Text);
                 item.SubItems.Add(comboBoxRelation.Text);
@@ -123,6 +135,17 @@ namespace RPCMon
         private void buttonReset_Click(object sender, EventArgs e)
         {
             listViewColumnFilters.Items.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            buttonAdd_Click(sender, e);
+            OnFilterOKUpdate(this.listViewColumnFilters);
         }
     }
 }
