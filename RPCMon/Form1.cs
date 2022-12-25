@@ -67,7 +67,7 @@ namespace RPCMon
             //Thread t1 = new Thread(checkIdDBGHelpExist);
             //t1.Start();
 
-            dummRowsForDebug();
+            //dummRowsForDebug();
             //DataGridViewRow row = new DataGridViewRow();
             //DataGridViewCellCollection cells = new DataGridViewCellCollection(row);
             //dataGridView1.Rows.Add(cells);
