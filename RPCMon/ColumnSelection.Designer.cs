@@ -28,7 +28,7 @@ namespace RPCMon
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(List<string> visableColumns)
+        private void InitializeComponent()
         {
             this.groupBoxProcessManagement = new System.Windows.Forms.GroupBox();
             this.checkBoxProcessName = new System.Windows.Forms.CheckBox();
@@ -72,7 +72,6 @@ namespace RPCMon
             // checkBoxProcessName
             // 
             this.checkBoxProcessName.AutoSize = true;
-            this.checkBoxProcessName.Checked = visableColumns.Contains("ProcessName");
             // this.checkBoxProcessName.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxProcessName.Location = new System.Drawing.Point(6, 53);
             this.checkBoxProcessName.Name = "checkBoxProcessName";
@@ -84,7 +83,6 @@ namespace RPCMon
             // checkBoxTID
             // 
             this.checkBoxTID.AutoSize = true;
-            this.checkBoxTID.Checked = visableColumns.Contains("TID"); ;
             // this.checkBoxTID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxTID.Location = new System.Drawing.Point(132, 30);
             this.checkBoxTID.Name = "checkBoxTID";
@@ -96,7 +94,6 @@ namespace RPCMon
             // checkBoxPID
             // 
             this.checkBoxPID.AutoSize = true;
-            this.checkBoxPID.Checked = visableColumns.Contains("PID");
             // this.checkBoxPID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxPID.Location = new System.Drawing.Point(7, 30);
             this.checkBoxPID.Name = "checkBoxPID";
@@ -133,7 +130,6 @@ namespace RPCMon
             // checkBoxImpersonationLevel
             // 
             this.checkBoxImpersonationLevel.AutoSize = true;
-            this.checkBoxImpersonationLevel.Checked = visableColumns.Contains("ImpersonationLevel");
             // this.checkBoxImpersonationLevel.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxImpersonationLevel.Location = new System.Drawing.Point(8, 97);
             this.checkBoxImpersonationLevel.Name = "checkBoxImpersonationLevel";
@@ -145,7 +141,6 @@ namespace RPCMon
             // checkBoxAuthenticationLevel
             // 
             this.checkBoxAuthenticationLevel.AutoSize = true;
-            this.checkBoxAuthenticationLevel.Checked = visableColumns.Contains("AuthenticationLevel");
             this.checkBoxAuthenticationLevel.Location = new System.Drawing.Point(7, 74);
             this.checkBoxAuthenticationLevel.Name = "checkBoxAuthenticationLevel";
             this.checkBoxAuthenticationLevel.Size = new System.Drawing.Size(120, 17);
@@ -156,7 +151,6 @@ namespace RPCMon
             // checkBoxAuthenticationService
             // 
             this.checkBoxAuthenticationService.AutoSize = true;
-            this.checkBoxAuthenticationService.Checked = visableColumns.Contains("AuthenticationService");
             this.checkBoxAuthenticationService.Location = new System.Drawing.Point(133, 74);
             this.checkBoxAuthenticationService.Name = "checkBoxAuthenticationService";
             this.checkBoxAuthenticationService.Size = new System.Drawing.Size(130, 17);
@@ -167,7 +161,6 @@ namespace RPCMon
             // checkBoxOptions
             // 
             this.checkBoxOptions.AutoSize = true;
-            this.checkBoxOptions.Checked = visableColumns.Contains("Options");
             this.checkBoxOptions.Location = new System.Drawing.Point(133, 51);
             this.checkBoxOptions.Name = "checkBoxOptions";
             this.checkBoxOptions.Size = new System.Drawing.Size(62, 17);
@@ -178,7 +171,6 @@ namespace RPCMon
             // checkBoxEndpoint
             // 
             this.checkBoxEndpoint.AutoSize = true;
-            this.checkBoxEndpoint.Checked = visableColumns.Contains("Endpoint");
             // this.checkBoxEndpoint.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEndpoint.Location = new System.Drawing.Point(7, 51);
             this.checkBoxEndpoint.Name = "checkBoxEndpoint";
@@ -190,7 +182,6 @@ namespace RPCMon
             // checkBoxProtocol
             // 
             this.checkBoxProtocol.AutoSize = true;
-            this.checkBoxProtocol.Checked = visableColumns.Contains("Protocol");
             // this.checkBoxProtocol.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxProtocol.Location = new System.Drawing.Point(133, 28);
             this.checkBoxProtocol.Name = "checkBoxProtocol";
@@ -202,7 +193,6 @@ namespace RPCMon
             // checkBoxNetworkAddress
             // 
             this.checkBoxNetworkAddress.AutoSize = true;
-            this.checkBoxNetworkAddress.Checked = visableColumns.Contains("NetworkAddress");
             this.checkBoxNetworkAddress.Location = new System.Drawing.Point(7, 28);
             this.checkBoxNetworkAddress.Name = "checkBoxNetworkAddress";
             this.checkBoxNetworkAddress.Size = new System.Drawing.Size(104, 17);
@@ -213,7 +203,6 @@ namespace RPCMon
             // checkBoxService
             // 
             this.checkBoxService.AutoSize = true;
-            this.checkBoxService.Checked = visableColumns.Contains("Service");
             // this.checkBoxService.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxService.Location = new System.Drawing.Point(132, 76);
             this.checkBoxService.Name = "checkBoxService";
@@ -225,7 +214,6 @@ namespace RPCMon
             // checkBoxUUID
             // 
             this.checkBoxUUID.AutoSize = true;
-            this.checkBoxUUID.Checked = visableColumns.Contains("UUID");
             // this.checkBoxUUID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxUUID.Location = new System.Drawing.Point(6, 30);
             this.checkBoxUUID.Name = "checkBoxUUID";
@@ -272,7 +260,6 @@ namespace RPCMon
             // checkBoxModulePath
             // 
             this.checkBoxModulePath.AutoSize = true;
-            this.checkBoxModulePath.Checked = visableColumns.Contains("ModulePath");
             this.checkBoxModulePath.Location = new System.Drawing.Point(6, 53);
             this.checkBoxModulePath.Name = "checkBoxModulePath";
             this.checkBoxModulePath.Size = new System.Drawing.Size(83, 17);
@@ -283,7 +270,6 @@ namespace RPCMon
             // checkBoxModule
             // 
             this.checkBoxModule.AutoSize = true;
-            this.checkBoxModule.Checked = visableColumns.Contains("Module");
             // this.checkBoxModule.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxModule.Location = new System.Drawing.Point(132, 30);
             this.checkBoxModule.Name = "checkBoxModule";
@@ -295,7 +281,6 @@ namespace RPCMon
             // checkBoxProceduresCount
             // 
             this.checkBoxProceduresCount.AutoSize = true;
-            this.checkBoxProceduresCount.Checked = visableColumns.Contains("ProceduresCount");
             this.checkBoxProceduresCount.Location = new System.Drawing.Point(132, 53);
             this.checkBoxProceduresCount.Name = "checkBoxProceduresCount";
             this.checkBoxProceduresCount.Size = new System.Drawing.Size(108, 17);
@@ -306,7 +291,6 @@ namespace RPCMon
             // checkBoxFunction
             // 
             this.checkBoxFunction.AutoSize = true;
-            this.checkBoxFunction.Checked = visableColumns.Contains("Function");
             // this.checkBoxFunction.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxFunction.Location = new System.Drawing.Point(7, 76);
             this.checkBoxFunction.Name = "checkBoxFunction";

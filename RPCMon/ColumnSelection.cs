@@ -25,7 +25,28 @@ namespace RPCMon
                     visableColumns.Add(column.HeaderText);
                 }
             }
-            InitializeComponent(visableColumns);
+            InitializeComponent();
+            initializeCheckboxes(visableColumns);
+        }
+
+        private void initializeCheckboxes(List<string> visableColumns)
+        {
+            this.checkBoxProcessName.Checked = visableColumns.Contains("ProcessName");
+            this.checkBoxTID.Checked = visableColumns.Contains("TID"); ;
+            this.checkBoxPID.Checked = visableColumns.Contains("PID");
+            this.checkBoxImpersonationLevel.Checked = visableColumns.Contains("ImpersonationLevel");
+            this.checkBoxAuthenticationLevel.Checked = visableColumns.Contains("AuthenticationLevel");
+            this.checkBoxAuthenticationService.Checked = visableColumns.Contains("AuthenticationService");
+            this.checkBoxOptions.Checked = visableColumns.Contains("Options");
+            this.checkBoxEndpoint.Checked = visableColumns.Contains("Endpoint");
+            this.checkBoxProtocol.Checked = visableColumns.Contains("Protocol");
+            this.checkBoxNetworkAddress.Checked = visableColumns.Contains("NetworkAddress");
+            this.checkBoxService.Checked = visableColumns.Contains("Service");
+            this.checkBoxUUID.Checked = visableColumns.Contains("UUID");
+            this.checkBoxModulePath.Checked = visableColumns.Contains("ModulePath");
+            this.checkBoxModule.Checked = visableColumns.Contains("Module");
+            this.checkBoxProceduresCount.Checked = visableColumns.Contains("ProceduresCount");
+            this.checkBoxFunction.Checked = visableColumns.Contains("Function");
         }
 
         public virtual void OnselectColumnsUpdate(GroupBox i_RPCClient, GroupBox i_RPCServer, GroupBox i_RPCMisc)
