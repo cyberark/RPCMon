@@ -36,17 +36,19 @@ namespace RPCMon
         private const string RPC_DB_KEY_Procedures = "Procedures";
         private const string NA_STRING = "N\\A";
         private string m_LastSearchValue;
-        private ListView m_LastListViewColumnFilter = new ListView();
-        private ListView m_LastListViewHighlighFilter = new ListView();
+        //private ListView m_LastListViewColumnFilter = new ListView();
+        //private ListView m_LastListViewHighlighFilter = new ListView();
         int m_CurrentRowIndexRightClick, m_CurrentColumnIndexRightClick;
         bool m_IsElevated = false;
         private bool autoScroll = false;
 
         // ListView i_ListView, Utils.eFormNames i_FormName
-        private ListView highLightListView = null;
-
-        private ListView filterListView = null;
-
+        private ListView m_highLightListView = new ListView();
+        private ListView m_filterListView = new ListView();
+        private IDictionary<string, List<ListViewItem>> m_includeFilterDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_excludeFilterDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_includeHighlightDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_excludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
 
         public Form1()
         {
@@ -65,7 +67,7 @@ namespace RPCMon
             //Thread t1 = new Thread(checkIdDBGHelpExist);
             //t1.Start();
 
-            //dummRowsForDebug();
+            dummRowsForDebug();
             //DataGridViewRow row = new DataGridViewRow();
             //DataGridViewCellCollection cells = new DataGridViewCellCollection(row);
             //dataGridView1.Rows.Add(cells);
@@ -154,44 +156,118 @@ namespace RPCMon
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(dataGridView1);
 
-            row.Cells[(int)Utils.eColumnNames.PID].Value = "1234";
-            row.Cells[(int)Utils.eColumnNames.TID].Value = "543";
-            row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
-            row.Cells[(int)Utils.eColumnNames.Function].Value = "func1";
-            row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process1";
-            row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n1";
-            row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol1";
-            row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint1";
+            //row.Cells[(int)Utils.eColumnNames.PID].Value = "1234";
+            //row.Cells[(int)Utils.eColumnNames.TID].Value = "543";
+            //row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            //row.Cells[(int)Utils.eColumnNames.Function].Value = "func1";
+            //row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process1";
+            //row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n1";
+            //row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol1";
+            //row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint1";
 
-            row.Cells[(int)Utils.eColumnNames.Options].Value = "option1";
-            row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth1";
-            row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS1";
-            row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper1";
+            //row.Cells[(int)Utils.eColumnNames.Options].Value = "option1";
+            //row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth1";
+            //row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS1";
+            //row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper1";
+            //row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+            //dataGridView1.Rows.Add(row);
+            //for (int i = 0; i < 16000; i++)
+            //{
+            //    row = new DataGridViewRow();
+            //    row.CreateCells(dataGridView1);
+
+            //    row.Cells[(int)Utils.eColumnNames.PID].Value = "654";
+            //    row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
+            //    row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            //    row.Cells[(int)Utils.eColumnNames.Function].Value = "func2";
+            //    row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
+            //    row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
+            //    row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
+            //    row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
+
+            //    row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
+            //    row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
+            //    row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
+            //    row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
+            //    row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+            //    dataGridView1.Rows.Add(row);
+
+
+            //}
+            row = new DataGridViewRow();
+            row.CreateCells(dataGridView1);
+
+            row.Cells[(int)Utils.eColumnNames.PID].Value = "1";
+            row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
+            row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            row.Cells[(int)Utils.eColumnNames.Function].Value = "a";
+            row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
+            row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
+            row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
+            row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
+
+            row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
+            row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
             row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
             dataGridView1.Rows.Add(row);
-            for (int i = 0; i < 16000; i++)
-            {
-                row = new DataGridViewRow();
-                row.CreateCells(dataGridView1);
 
-                row.Cells[(int)Utils.eColumnNames.PID].Value = "654";
-                row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
-                row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
-                row.Cells[(int)Utils.eColumnNames.Function].Value = "func2";
-                row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
-                row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
-                row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
-                row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
+            row = new DataGridViewRow();
+            row.CreateCells(dataGridView1);
 
-                row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
-                row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
-                row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
-                row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
-                row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
-                dataGridView1.Rows.Add(row);
+            row.Cells[(int)Utils.eColumnNames.PID].Value = "2";
+            row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
+            row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            row.Cells[(int)Utils.eColumnNames.Function].Value = "a";
+            row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
+            row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
+            row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
+            row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
 
+            row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
+            row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
+            row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+            dataGridView1.Rows.Add(row);
+            row = new DataGridViewRow();
+            row.CreateCells(dataGridView1);
 
-            }
+            row.Cells[(int)Utils.eColumnNames.PID].Value = "1";
+            row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
+            row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            row.Cells[(int)Utils.eColumnNames.Function].Value = "b";
+            row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
+            row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
+            row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
+            row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
+
+            row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
+            row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
+            row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+            dataGridView1.Rows.Add(row);
+
+            row = new DataGridViewRow();
+            row.CreateCells(dataGridView1);
+
+            row.Cells[(int)Utils.eColumnNames.PID].Value = "3";
+            row.Cells[(int)Utils.eColumnNames.TID].Value = "222";
+            row.Cells[(int)Utils.eColumnNames.UUID].Value = "";
+            row.Cells[(int)Utils.eColumnNames.Function].Value = "a";
+            row.Cells[(int)Utils.eColumnNames.ProcessName].Value = "Process2";
+            row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = "n2";
+            row.Cells[(int)Utils.eColumnNames.Protocol].Value = "protocol2";
+            row.Cells[(int)Utils.eColumnNames.Endpoint].Value = "endpoint2";
+
+            row.Cells[(int)Utils.eColumnNames.Options].Value = "option2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = "auth2";
+            row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = "authS2";
+            row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = "imper2";
+            row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+            dataGridView1.Rows.Add(row);
         }
 
         private void startEventTracing()
@@ -210,10 +286,10 @@ namespace RPCMon
             {
 
                 m_TraceSession = session;
-                
+
                 session.EnableProvider("Microsoft-Windows-RPC", Microsoft.Diagnostics.Tracing.TraceEventLevel.Verbose);
                 var parser = new MicrosoftWindowsRPCTraceEventParser(session.Source);
-                
+
                 // Do we want to include more events? server events?
 
                 parser.RpcClientCallStart += e2 =>
@@ -221,7 +297,7 @@ namespace RPCMon
                     // addEventToListView(e2);
                     //filterRowsByFilterRules(highLightListView, highLightFormName);
                     addEventToDataGridView(e2);
-                    
+
                     /* 
                       // Throws an error "Cross-thread operation not valid: Control 'textBox1' accessed from a thread other than the thread it was created on."
                      string funcName = getFunctionName(e2.InterfaceUuid.ToString(), e2.ProcNum);
@@ -295,17 +371,14 @@ namespace RPCMon
                 row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = i_Event.ImpersonationLevel.ToString();
                 row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
                 dataGridView1.Rows.Add(row);
-                if (filterListView != null)
+                if (!m_includeHighlightDict.Count.Equals(0) || !m_excludeHighlightDict.Count.Equals(0))
                 {
-                    filterSingleRowByFilterRules(filterListView, Utils.eFormNames.FormColumnFilter, row);
+                    filterSingleRowByFilterRules(Utils.eFormNames.FormHighlighFilter, row);
                 }
-                if (highLightListView != null && row.Visible)
+                if (!m_includeFilterDict.Count.Equals(0) || !m_excludeFilterDict.Count.Equals(0))
                 {
-                    filterSingleRowByFilterRules(highLightListView, Utils.eFormNames.FormHighlighFilter, row);
+                    filterSingleRowByFilterRules(Utils.eFormNames.FormColumnFilter, row);
                 }
-
-
-                //TODO: check if cell is visible
                 if (row.Visible && autoScroll)
                     dataGridView1.FirstDisplayedCell = row.Cells[(int)Utils.eColumnNames.ImpersonationLevel];
                 this.m_TotalNumberOfEvents += 1;
@@ -368,7 +441,7 @@ namespace RPCMon
 
         private void toolStripButtonAutoScroll_Click(object sender, EventArgs e)
         {
-            if(autoScroll)
+            if (autoScroll)
             {
                 autoScroll = false;
                 toolStripButtonAutoScroll.Image = global::RPCMon.Properties.Resources.scroll_disable;
@@ -396,7 +469,7 @@ namespace RPCMon
         {
             //ColumnFilter columnFilter = new ColumnFilter(listView1);
             // ColumnFilter columnFilter = new ColumnFilter(ref dataGridView1);
-            ColumnFilter columnFilter = new ColumnFilter(ref m_LastListViewColumnFilter);
+            ColumnFilter columnFilter = new ColumnFilter(ref m_filterListView);
             columnFilter.FilterOKUpdate += new FilterOKEventHandler(ColumnFilter_OKFilter);
             columnFilter.ShowDialog();
         }
@@ -418,7 +491,7 @@ namespace RPCMon
 
         private void openHighlightWindows()
         {
-            FormHighlighting hightlightWindow = new FormHighlighting(ref m_LastListViewHighlighFilter);
+            FormHighlighting hightlightWindow = new FormHighlighting(ref m_highLightListView);
             hightlightWindow.hightlightRowsUpdate += HightlightWindow_hightlightRowsUpdate;
             hightlightWindow.ShowDialog();
         }
@@ -432,8 +505,17 @@ namespace RPCMon
 
         private void HightlightWindow_hightlightRowsUpdate(ListView i_ListView)
         {
-            highLightListView = i_ListView;
-            filterRowsByFilterRules(i_ListView, Utils.eFormNames.FormHighlighFilter);
+            m_highLightListView = i_ListView;
+            updateFilterDicts(i_ListView, Utils.eFormNames.FormHighlighFilter);
+            if (m_includeHighlightDict.Count.Equals(0))
+            {
+                foreach (DataGridViewRow row in this.dataGridView1.Rows)
+                {
+                    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
+                }
+                return;
+            }
+            filterRowsByFilterRules(Utils.eFormNames.FormHighlighFilter);
             //int columnCounter = 0;
             //foreach (DataGridViewRow row in this.dataGridView1.Rows)
             //{
@@ -497,7 +579,7 @@ namespace RPCMon
                 step = -1;
             }
 
-            if (dataGridView1.SelectedRows != null &&  dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 startIndex = selectedRow.Index;
@@ -510,7 +592,7 @@ namespace RPCMon
             }
 
             startIndex += step;
-            for (int i = startIndex; i < dataGridView1.Rows.Count; i+= step)
+            for (int i = startIndex; i < dataGridView1.Rows.Count; i += step)
             {
 
                 if (i < 0)
@@ -570,27 +652,27 @@ namespace RPCMon
             }
         }
 
-        private Color getHighlighColorIfRequired(string i_Action)
-        {
-            Color resultColor = Color.White;
-            if (i_Action == "Include")
-            {
-                resultColor = Color.Cyan;
-            }
+        //private Color getHighlighColorIfRequired(string i_Action)
+        //{
+        //    Color resultColor = Color.White;
+        //    if (i_Action == "Include")
+        //    {
+        //        resultColor = Color.Cyan;
+        //    }
 
-            return resultColor;
-        }
+        //    return resultColor;
+        //}
 
         private void filterRowBasedOnForm(Utils.eFormNames i_FormName, int i_RowIndex, string i_Action)
         {
-         
+
             if (i_FormName == Utils.eFormNames.FormColumnFilter)
             {
                 this.dataGridView1.Rows[i_RowIndex].Visible = (i_Action == "Include");
             }
             else
             {
-                this.dataGridView1.Rows[i_RowIndex].DefaultCellStyle.BackColor = getHighlighColorIfRequired(i_Action);
+                this.dataGridView1.Rows[i_RowIndex].DefaultCellStyle.BackColor = (i_Action == "Include") ? Color.Cyan : Color.White;
             }
         }
 
@@ -606,128 +688,292 @@ namespace RPCMon
             }
         }
 
-        private void filterSingleRowByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName, DataGridViewRow row)
+        private bool checkIfShouldBeVisable(ListViewItem rule, DataGridViewRow row, String key)
         {
-            int rowCounter = 0;
-            if (highLightListView == null)
+            DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
+            string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
+            if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
             {
-                    return;
-            }
-            if (rowCounter <= this.dataGridView1.Rows.Count - 1)
-            {
-                foreach (ListViewItem rule in i_ListView.Items)
+                if (row.Cells["Column" + key].Value.ToString().Contains(rule.SubItems[(int)Utils.eFilterNames.Value].Text))
                 {
-                    if (rule.Checked)
+                    if (cellValueFromGridViewCell.Value.ToString().Contains(valueFromFilter))
                     {
-                        DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
-                        string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
-                        if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
-                        {
-                            if ((cellValueFromGridViewCell.Value.ToString()).Contains(valueFromFilter))
-                            {
-
-                                filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-
-                                //if (i_FormName == Utils.eFormNames.FormColumnFilter)
-                                //{
-                                //    this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-
-                                //} else
-                                //{
-                                //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = getHighlighColorIfRequired(rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-                                //}
-                            }
-                            else
-                            {
-
-                                hideFilterRowBasedOnForm(i_FormName, row.Index);
-                                //if (i_FormName == Utils.eFormNames.FormColumnFilter)
-                                //{
-                                //    this.dataGridView1.Rows[row.Index].Visible = false;
-                                //}
-                                //else
-                                //{
-                                //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
-                                //}
-                            }
-
-                        }
-                        else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
-                        {
-                            if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
-                            {
-                                filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-                                // this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-                            }
-                            else
-                            {
-                                hideFilterRowBasedOnForm(i_FormName, row.Index);
-                                //this.dataGridView1.Rows[row.Index].Visible = false;
-                            }
-                        }
-                        else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with")
-                        {
-
-                            if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
-                            {
-                                filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-                                //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-                            }
-                            else
-                            {
-                                hideFilterRowBasedOnForm(i_FormName, row.Index);
-                                //this.dataGridView1.Rows[row.Index].Visible = false;
-                            }
-                        }
-                        else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
-                        {
-
-                            if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
-                            {
-                                filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-                                //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-                            }
-                            else
-                            {
-                                hideFilterRowBasedOnForm(i_FormName, row.Index);
-                                //this.dataGridView1.Rows[row.Index].Visible = false;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
+                        return true;
                     }
                 }
             }
+            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
+            {
+                if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
+                {
+                    return true;
+                }
+            }
+            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with")
+            {
+                if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
+                {
+                    return true;
+                }
+            }
+            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
+            {
 
-            rowCounter++;
+                if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        private void filterRowsByFilterRules(ListView i_ListView, Utils.eFormNames i_FormName)
+        private void filterRow(Utils.eFormNames i_FormName, DataGridViewRow row, IDictionary<string, List<ListViewItem>> includeDict, IDictionary<string, List<ListViewItem>> excludeDict)
+        {
+            bool visable = false;
+            foreach (var pair in excludeDict)
+            {
+                foreach (var rule in pair.Value)
+                {
+                    if (checkIfShouldBeVisable(rule, row, pair.Key))
+                    {
+                        hideFilterRowBasedOnForm(i_FormName, row.Index);
+                        return;
+                    }
+                }
+            }
+            if (!excludeDict.Count.Equals(0))
+            {
+                filterRowBasedOnForm(i_FormName, row.Index, "Include");
+            }
+
+
+            foreach (var pair in includeDict)
+            {
+                foreach (var rule in pair.Value)
+                {
+                    if (checkIfShouldBeVisable(rule, row, pair.Key))
+                    {
+                        visable = true;
+                        break;
+                    }
+                }
+                if (!visable)
+                {
+                    hideFilterRowBasedOnForm(i_FormName, row.Index);
+                    return;
+                }
+                visable = false;
+            }
+            if (!includeDict.Count.Equals(0))
+            {
+                filterRowBasedOnForm(i_FormName, row.Index, "Include");
+            }
+        }
+        private void filterSingleRowByFilterRules(Utils.eFormNames i_FormName, DataGridViewRow row)
+        {
+            
+            //int rowCounter = 0;
+            if(i_FormName == Utils.eFormNames.FormColumnFilter)
+            {
+                filterRow(i_FormName, row, m_includeFilterDict, m_excludeFilterDict);
+            }
+            else
+            {
+                filterRow(i_FormName, row, m_includeHighlightDict, m_excludeHighlightDict);
+            }
+            
+
+
+            //if (rowCounter <= this.dataGridView1.Rows.Count - 1)
+            //{
+            //    foreach (ListViewItem rule in i_ListView.Items)
+            //    {
+            //        if (rule.Checked)
+            //        {
+            //            DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
+            //            string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
+            //            if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
+            //            {
+            //                if ((cellValueFromGridViewCell.Value.ToString()).Contains(valueFromFilter))
+            //                {
+
+            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
+            //                    return;
+            //                    //if (i_FormName == Utils.eFormNames.FormColumnFilter)
+            //                    //{
+            //                    //    this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
+
+            //                    //} else
+            //                    //{
+            //                    //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = getHighlighColorIfRequired(rule.SubItems[(int)Utils.eFilterNames.Action].Text);
+            //                    //}
+            //                }
+            //                else
+            //                {
+
+            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
+            //                    //if (i_FormName == Utils.eFormNames.FormColumnFilter)
+            //                    //{
+            //                    //    this.dataGridView1.Rows[row.Index].Visible = false;
+            //                    //}
+            //                    //else
+            //                    //{
+            //                    //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
+            //                    //}
+            //                }
+
+            //            }
+            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
+            //            {
+            //                if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
+            //                {
+            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
+            //                    return;
+            //                    // this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
+            //                }
+            //                else
+            //                {
+            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
+            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
+            //                }
+
+            //            }
+            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with")
+            //            {
+
+            //                if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
+            //                {
+            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
+            //                    return;
+            //                    //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
+            //                }
+            //                else
+            //                {
+            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
+            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
+            //                }
+
+            //            }
+            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
+            //            {
+
+            //                if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
+            //                {
+            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
+            //                    return;
+            //                    //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
+            //                }
+            //                else
+            //                {
+            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
+            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
+            //                }
+
+            //            }
+
+            //        }
+            //    }
+            //}
+
+            //rowCounter++;
+        }
+
+        private void addItemToFilterDict(ListViewItem rule, bool addToExcludeList, Utils.eFormNames i_FormName)
+        {
+            if(i_FormName == Utils.eFormNames.FormColumnFilter)
+            {
+                if (addToExcludeList)
+                {
+                    if (!m_excludeFilterDict.ContainsKey(rule.SubItems[0].Text))
+                    {
+                        m_excludeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                    }
+                    m_excludeFilterDict[rule.SubItems[0].Text].Add(rule);
+                }
+                else
+                {
+                    if (!m_includeFilterDict.ContainsKey(rule.SubItems[0].Text))
+                    {
+                        m_includeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                    }
+                    m_includeFilterDict[rule.SubItems[0].Text].Add(rule);
+                }
+            }
+            else
+            {
+                if (addToExcludeList)
+                {
+                    if (!m_excludeHighlightDict.ContainsKey(rule.SubItems[0].Text))
+                    {
+                        m_excludeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                    }
+                    m_excludeHighlightDict[rule.SubItems[0].Text].Add(rule);
+                }
+                else
+                {
+                    if (!m_includeHighlightDict.ContainsKey(rule.SubItems[0].Text))
+                    {
+                        m_includeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                    }
+                    m_includeHighlightDict[rule.SubItems[0].Text].Add(rule);
+                }
+            } 
+        }
+
+        private void updateFilterDicts(ListView i_ListView, Utils.eFormNames i_FormName)
+        {
+            if (i_FormName == Utils.eFormNames.FormColumnFilter)
+            {
+                m_includeFilterDict.Clear();
+                m_excludeFilterDict.Clear();
+            }
+            else
+            {
+                m_includeHighlightDict.Clear();
+                m_excludeHighlightDict.Clear();
+            }
+            foreach (ListViewItem rule in i_ListView.Items)
+            {
+                if (rule.Checked)
+                {
+                    addItemToFilterDict(rule, rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Exclude", i_FormName);
+                }
+            }
+        }
+
+        private void filterRowsByFilterRules(Utils.eFormNames i_FormName)
         {
             
             // TODO: What happens if one row is already Filtered\Highlight? It will hide it. Need to fix it
             // so there will be OR between the rules
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
-                filterSingleRowByFilterRules(i_ListView, i_FormName, row);
+                filterSingleRowByFilterRules(i_FormName, row);
             }
 
-            if (i_FormName == Utils.eFormNames.FormColumnFilter)
-            {
-                m_LastListViewColumnFilter = i_ListView;
-            } else
-            {
-                m_LastListViewHighlighFilter = i_ListView;
-            }
+            //if (i_FormName == Utils.eFormNames.FormColumnFilter)
+            //{
+            //    m_LastListViewColumnFilter = i_ListView;
+            //} else
+            //{
+            //    m_LastListViewHighlighFilter = i_ListView;
+            //}
         }
 
         private void ColumnFilter_OKFilter(ListView i_ListView)
         {
-            filterListView = i_ListView;
-            filterRowsByFilterRules(i_ListView, Utils.eFormNames.FormColumnFilter);
+
+            m_filterListView = i_ListView;
+            updateFilterDicts(i_ListView, Utils.eFormNames.FormColumnFilter);
+            if (m_includeFilterDict.Count.Equals(0))
+            {
+                foreach (DataGridViewRow row in this.dataGridView1.Rows)
+                {
+                    row.Visible = true;
+                }
+            }
+            filterRowsByFilterRules(Utils.eFormNames.FormColumnFilter);
+
             //int rowCounter = 0;
             //bool shouldInclude = false;
             //foreach (DataGridViewRow row in this.dataGridView1.Rows)

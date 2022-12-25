@@ -64,7 +64,7 @@ namespace RPCMon
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (!isRowExist(comboBoxColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text))
+            if (!isRowExist(comboBoxColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text) && !comboBoxValue.Text.Equals(""))
             {
                 ListViewItem item = new ListViewItem(comboBoxColumn.Text);
                 item.SubItems.Add(comboBoxRelation.Text);
@@ -110,6 +110,7 @@ namespace RPCMon
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            buttonAdd_Click(sender, e);
             OnHighlightRowsUpdate(listViewHighlights);
             this.Close();
         }
