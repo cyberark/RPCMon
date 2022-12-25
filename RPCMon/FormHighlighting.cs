@@ -119,5 +119,11 @@ namespace RPCMon
         {
             this.listViewHighlights.Clear();
         }
+
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            buttonAdd_Click(sender, e);
+            OnHighlightRowsUpdate(listViewHighlights);
+        }
     }
 }

@@ -516,47 +516,6 @@ namespace RPCMon
                 return;
             }
             filterRowsByFilterRules(Utils.eFormNames.FormHighlighFilter);
-            //int columnCounter = 0;
-            //foreach (DataGridViewRow row in this.dataGridView1.Rows)
-            //{
-            //    if (columnCounter != this.dataGridView1.Rows.Count - 1)
-            //    {
-            //        foreach (ListViewItem rule in i_ListView.Items)
-            //        {
-            //            if (rule.Checked)
-            //            {
-            //                DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
-            //                string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
-            //                if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
-            //                {
-
-            //                    if ((cellValueFromGridViewCell.Value.ToString()).Contains(valueFromFilter))
-            //                    {
-            //                        if (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include")
-            //                        {
-            //                            this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.Cyan;
-            //                        }
-            //                        else
-            //                        {
-            //                            this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
-
-            //                        }
-            //                    }
-            //                    else
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
-            //                    }
-
-            //                }
-
-            //            }
-            //        }
-            //    }
-
-            //    columnCounter++;
-            //}
-
-            //m_LastListViewHighlighFilter = i_ListView;
         }
 
         private void cleanAllSelectedCells()
@@ -651,17 +610,6 @@ namespace RPCMon
                 modifyColumnSelection(column, i_RPCMisc);
             }
         }
-
-        //private Color getHighlighColorIfRequired(string i_Action)
-        //{
-        //    Color resultColor = Color.White;
-        //    if (i_Action == "Include")
-        //    {
-        //        resultColor = Color.Cyan;
-        //    }
-
-        //    return resultColor;
-        //}
 
         private void filterRowBasedOnForm(Utils.eFormNames i_FormName, int i_RowIndex, string i_Action)
         {
@@ -771,8 +719,6 @@ namespace RPCMon
         }
         private void filterSingleRowByFilterRules(Utils.eFormNames i_FormName, DataGridViewRow row)
         {
-            
-            //int rowCounter = 0;
             if(i_FormName == Utils.eFormNames.FormColumnFilter)
             {
                 filterRow(i_FormName, row, m_includeFilterDict, m_excludeFilterDict);
@@ -781,101 +727,6 @@ namespace RPCMon
             {
                 filterRow(i_FormName, row, m_includeHighlightDict, m_excludeHighlightDict);
             }
-            
-
-
-            //if (rowCounter <= this.dataGridView1.Rows.Count - 1)
-            //{
-            //    foreach (ListViewItem rule in i_ListView.Items)
-            //    {
-            //        if (rule.Checked)
-            //        {
-            //            DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
-            //            string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
-            //            if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
-            //            {
-            //                if ((cellValueFromGridViewCell.Value.ToString()).Contains(valueFromFilter))
-            //                {
-
-            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-            //                    return;
-            //                    //if (i_FormName == Utils.eFormNames.FormColumnFilter)
-            //                    //{
-            //                    //    this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-
-            //                    //} else
-            //                    //{
-            //                    //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = getHighlighColorIfRequired(rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-            //                    //}
-            //                }
-            //                else
-            //                {
-
-            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
-            //                    //if (i_FormName == Utils.eFormNames.FormColumnFilter)
-            //                    //{
-            //                    //    this.dataGridView1.Rows[row.Index].Visible = false;
-            //                    //}
-            //                    //else
-            //                    //{
-            //                    //    this.dataGridView1.Rows[row.Index].DefaultCellStyle.BackColor = Color.White;
-            //                    //}
-            //                }
-
-            //            }
-            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
-            //            {
-            //                if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
-            //                {
-            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-            //                    return;
-            //                    // this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                }
-            //                else
-            //                {
-            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
-            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
-            //                }
-
-            //            }
-            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with")
-            //            {
-
-            //                if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
-            //                {
-            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-            //                    return;
-            //                    //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                }
-            //                else
-            //                {
-            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
-            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
-            //                }
-
-            //            }
-            //            else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
-            //            {
-
-            //                if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
-            //                {
-            //                    filterRowBasedOnForm(i_FormName, row.Index, rule.SubItems[(int)Utils.eFilterNames.Action].Text);
-            //                    return;
-            //                    //this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                }
-            //                else
-            //                {
-            //                    hideFilterRowBasedOnForm(i_FormName, row.Index);
-            //                    //this.dataGridView1.Rows[row.Index].Visible = false;
-            //                }
-
-            //            }
-
-            //        }
-            //    }
-            //}
-
-            //rowCounter++;
         }
 
         private void addItemToFilterDict(ListViewItem rule, bool addToExcludeList, Utils.eFormNames i_FormName)
@@ -950,14 +801,6 @@ namespace RPCMon
             {
                 filterSingleRowByFilterRules(i_FormName, row);
             }
-
-            //if (i_FormName == Utils.eFormNames.FormColumnFilter)
-            //{
-            //    m_LastListViewColumnFilter = i_ListView;
-            //} else
-            //{
-            //    m_LastListViewHighlighFilter = i_ListView;
-            //}
         }
 
         private void ColumnFilter_OKFilter(ListView i_ListView)
@@ -973,72 +816,6 @@ namespace RPCMon
                 }
             }
             filterRowsByFilterRules(Utils.eFormNames.FormColumnFilter);
-
-            //int rowCounter = 0;
-            //bool shouldInclude = false;
-            //foreach (DataGridViewRow row in this.dataGridView1.Rows)
-            //{
-            //    if (rowCounter <= this.dataGridView1.Rows.Count - 1)
-            //    {
-            //        foreach (ListViewItem rule in i_ListView.Items)
-            //        {
-            //            if (rule.Checked)
-            //            {
-            //                DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
-            //                string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
-            //                if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
-            //                {
-            //                    if ((cellValueFromGridViewCell.Value.ToString()).Contains(valueFromFilter))
-            //                    {
-            //                       this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                    }
-            //                    else
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = false;
-            //                    }
-
-            //                } else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
-            //                {
-            //                    if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                    }
-            //                    else
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = false;
-            //                    }
-            //                } else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with") {
-
-            //                    if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                    }
-            //                    else
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = false;
-            //                    }
-            //                }
-            //                else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
-            //                {
-
-            //                    if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = (rule.SubItems[(int)Utils.eFilterNames.Action].Text == "Include");
-            //                    }
-            //                    else
-            //                    {
-            //                        this.dataGridView1.Rows[row.Index].Visible = false;
-            //                    }
-            //                }
-
-            //            }
-            //        }
-            //    }
-
-            //    rowCounter++;
-            //}
-
-            //m_LastListViewColumnFilter = i_ListView;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
