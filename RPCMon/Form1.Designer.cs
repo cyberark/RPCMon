@@ -33,6 +33,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAllDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAsIsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadDBToolStripMenuItemLoadDB = new System.Windows.Forms.ToolStripMenuItem();
             this.buildDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,8 +51,8 @@
             this.toolStripButtonFind = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHighlight = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonGrid = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAutoScroll = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRemoveDuplicate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAutoScroll = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnPID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,7 +101,9 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.importToolStripMenuItem,
+            this.importToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -105,9 +111,39 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.saveToolStripMenuItem.Text = "Save...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importAllDataToolStripMenuItem,
+            this.importAsIsToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.importToolStripMenuItem.Text = "Export";
+            // 
+            // importAllDataToolStripMenuItem
+            // 
+            this.importAllDataToolStripMenuItem.Name = "importAllDataToolStripMenuItem";
+            this.importAllDataToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.importAllDataToolStripMenuItem.Text = "Export All Data...";
+            this.importAllDataToolStripMenuItem.Click += new System.EventHandler(this.exportAllDataToolStripMenuItem_Click);
+            // 
+            // importAsIsToolStripMenuItem
+            // 
+            this.importAsIsToolStripMenuItem.Name = "importAsIsToolStripMenuItem";
+            this.importAsIsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.importAsIsToolStripMenuItem.Text = "Export As Is...";
+            this.importAsIsToolStripMenuItem.Click += new System.EventHandler(this.exportAsIsToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem1
+            // 
+            this.importToolStripMenuItem1.Name = "importToolStripMenuItem1";
+            this.importToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+            this.importToolStripMenuItem1.Text = "Import...";
+            this.importToolStripMenuItem1.Click += new System.EventHandler(this.importToolStripMenuItem1_Click);
             // 
             // dBToolStripMenuItem
             // 
@@ -242,6 +278,16 @@
             this.toolStripButtonGrid.Text = "Show Grid";
             this.toolStripButtonGrid.Click += new System.EventHandler(this.toolStripButtonGrid_Click);
             // 
+            // toolStripButtonRemoveDuplicate
+            // 
+            this.toolStripButtonRemoveDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveDuplicate.Image = global::RPCMon.Properties.Resources.duplicate_disable;
+            this.toolStripButtonRemoveDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveDuplicate.Name = "toolStripButtonRemoveDuplicate";
+            this.toolStripButtonRemoveDuplicate.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRemoveDuplicate.Text = "Remove Duplicate Rows";
+            this.toolStripButtonRemoveDuplicate.Click += new System.EventHandler(this.toolStripButtonRemoveDuplicate_Click);
+            // 
             // toolStripButtonAutoScroll
             // 
             this.toolStripButtonAutoScroll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -253,18 +299,9 @@
             this.toolStripButtonAutoScroll.ToolTipText = "Auto Scroll";
             this.toolStripButtonAutoScroll.Click += new System.EventHandler(this.toolStripButtonAutoScroll_Click);
             // 
-            // toolStripButtonRemoveDuplicate
-            // 
-            this.toolStripButtonRemoveDuplicate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonRemoveDuplicate.Image = global::RPCMon.Properties.Resources.duplicate_disable;
-            this.toolStripButtonRemoveDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRemoveDuplicate.Name = "toolStripButtonRemoveDuplicate";
-            this.toolStripButtonRemoveDuplicate.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonRemoveDuplicate.Text = "Remove Duplicate Rows";
-            this.toolStripButtonRemoveDuplicate.Click += new System.EventHandler(this.toolStripButtonRemoveDuplicate_Click);
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowDrop = true;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -295,6 +332,8 @@
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
+            this.dataGridView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragDrop);
+            this.dataGridView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragEnter);
             // 
             // ColumnPID
             // 
@@ -400,6 +439,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelTotalEvents,
             this.toolStripStatusLabelDBPath});
@@ -426,6 +466,7 @@
             // 
             // contextMenuStripRightClickGridView
             // 
+            this.contextMenuStripRightClickGridView.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStripRightClickGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyRowToolStripMenuItem,
             this.copyCellToolStripMenuItem});
@@ -518,6 +559,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnImpersonationLevel;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setDbgHelpFilePathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importAllDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importAsIsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem1;
     }
 }
 

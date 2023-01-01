@@ -17,6 +17,7 @@ using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC;
 using RPCMon.Control;
 using System.Reflection;
 using System.Security.Principal;
+using Newtonsoft.Json.Linq;
 
 namespace RPCMon
 {
@@ -1123,9 +1124,133 @@ namespace RPCMon
             checkIdDBGHelpExist();
         }
 
+
+        private void exportAllDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filePath = saveFilePath();
+            if (filePath == "") return;
+            JArray data = new JArray();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                JObject rowData = new JObject();
+                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                {
+                    rowData[col.HeaderText] = (string)row.Cells[col.Index].Value;
+                }
+                data.Add(rowData);
+            }
+            string json = data.ToString();
+            File.WriteAllText(filePath, json);
+            MessageBox.Show("Export Completed!");
+        }
+
+        private void exportAsIsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filePath = saveFilePath();
+            if(filePath == "") return;
+            JArray data = new JArray();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Visible)
+                {
+                    JObject rowData = new JObject();
+                    rowData["Highlighted"] = row.DefaultCellStyle.BackColor != Color.White;
+                    rowData["Bold"] = row.DefaultCellStyle.Font.Bold;
+                    foreach (DataGridViewColumn col in dataGridView1.Columns)
+                    {
+                        rowData[col.HeaderText] = (string)row.Cells[col.Index].Value;
+
+                    }
+                    data.Add(rowData);
+                }
+                
+            }
+            string json = data.ToString();
+            File.WriteAllText(filePath, json);
+            MessageBox.Show("Export Completed!");
+        }
+        private string saveFilePath()
+        {
+            string filePath = "";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "JSON files|*.json";
+            saveFileDialog1.Title = "Save as JSON File";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                filePath = saveFileDialog1.FileName;
+            }
+            return filePath;
+        }
+        private void importToolStripMenuItem1_Click(object sender, EventArgs e)
+        {            
+            string fileName = "";
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Title = "Select a JSON file";
+            openFileDialog1.Filter = "JSON files|*.json";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fileName = openFileDialog1.FileName;
+            }
+            if(fileName == "") return;
+            importFile(fileName);
+
+
+        }
+
+        private void dataGridView1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void dataGridView1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            importFile(fileList[0]);
+
+        }
+
+        private void importFile(string fileName)
+        {
+            string json = File.ReadAllText(fileName);
+            try
+            {
+                List<Dictionary<string, object>> data = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+                foreach (Dictionary<string, object> item in data)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    foreach (KeyValuePair<string, object> pair in item)
+                    {
+                        if (pair.Key.Equals("Highlighted"))
+                        {
+                            row.DefaultCellStyle.BackColor = pair.Value.Equals(false) ? Color.White : Color.Cyan;
+                            continue;
+                        }
+                        else if (pair.Key.Equals("Bold"))
+                        {
+                            row.DefaultCellStyle.Font = pair.Value.Equals(true) ? new System.Drawing.Font(this.Font, FontStyle.Bold) : new System.Drawing.Font(this.Font, FontStyle.Regular);
+                            continue;
+                        }
+                        DataGridViewCell cell = new DataGridViewTextBoxCell();
+                        cell.Value = pair.Value;
+                        row.Cells.Add(cell);
+                    }
+
+                    dataGridView1.Rows.Add(row);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Invalid File!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("Import Completed!", "Import Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void updateToolStripStatusLabelDBPath(string i_DBPath)
-       {
+        {
             this.toolStripStatusLabelDBPath.Text = "DB File: " + Path.GetFileName(this.m_RPCDBPath);
-       }
+        }
     }
 }
