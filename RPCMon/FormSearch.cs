@@ -20,6 +20,7 @@ namespace RPCMon
         public FormSearch()
         {
             InitializeComponent();
+            this.AcceptButton = buttonFind;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

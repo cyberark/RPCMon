@@ -19,6 +19,7 @@ namespace RPCMon
         public FormHighlighting(ref ListView i_ListViewHighlighFilter)
         {
             InitializeComponentWrapper();
+            this.AcceptButton = buttonOK;
 
             foreach (ListViewItem item in i_ListViewHighlighFilter.Items)
             {

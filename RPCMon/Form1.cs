@@ -18,6 +18,7 @@ using RPCMon.Control;
 using System.Reflection;
 using System.Security.Principal;
 using Newtonsoft.Json.Linq;
+using Timer = System.Windows.Forms.Timer;
 
 namespace RPCMon
 {
@@ -30,6 +31,8 @@ namespace RPCMon
         private bool m_IsCaptureButtonPressed = false;
         private Thread m_CaptureThread;
         private int m_TotalNumberOfEvents = 0;
+        private int m_TotalShownEvents = 0;
+        private Timer timer1;
         private const string RPC_DB_KEY_Module = "Module";
         private const string RPC_DB_KEY_ModulePath = "ModulePath";
         private const string RPC_DB_KEY_ProceduresCount = "ProceduresCount";
@@ -46,16 +49,19 @@ namespace RPCMon
         // ListView i_ListView, Utils.eFormNames i_FormName
         private ListView m_highLightListView = new ListView();
         private ListView m_filterListView = new ListView();
-        private IDictionary<string, List<ListViewItem>> m_includeFilterDict = new Dictionary<string, List<ListViewItem>>();
-        private IDictionary<string, List<ListViewItem>> m_excludeFilterDict = new Dictionary<string, List<ListViewItem>>();
-        private IDictionary<string, List<ListViewItem>> m_includeHighlightDict = new Dictionary<string, List<ListViewItem>>();
-        private IDictionary<string, List<ListViewItem>> m_excludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_IncludeFilterDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_ExcludeFilterDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_IncludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
+        private IDictionary<string, List<ListViewItem>> m_ExcludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
 
         public Form1()
         {
             InitializeComponent();
             configureFormBasedPrivileges();
-
+            timer1 = new Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 100; // in miliseconds
+           // timer1.Start();
 
             this.m_RPCDBPath = getDBFromCurrentFolder();
             this.toolStripStatusLabelDBPath.Text = "DB File: " + Path.GetFileName(this.m_RPCDBPath);
@@ -112,7 +118,24 @@ namespace RPCMon
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            updatetoolStripStatusLabelTotalEvents();
+            
+        }
 
+        private void updatetoolStripStatusLabelTotalEvents()
+        {
+            m_TotalShownEvents = 0;
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                if (row.Visible)
+                {
+                    m_TotalShownEvents++;
+                }
+            }
+            toolStripStatusLabelTotalEvents.Text = "Shown events: " + m_TotalShownEvents + "/" + m_TotalNumberOfEvents;
+        }
         private void checkIdDBGHelpExist()
         {
             if (!File.Exists(Engine.DbgHelpFilePath))
@@ -372,18 +395,18 @@ namespace RPCMon
                 row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = i_Event.ImpersonationLevel.ToString();
                 row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
                 dataGridView1.Rows.Add(row);
-                if (!m_includeHighlightDict.Count.Equals(0) || !m_excludeHighlightDict.Count.Equals(0))
+                if (!m_IncludeHighlightDict.Count.Equals(0) || !m_ExcludeHighlightDict.Count.Equals(0))
                 {
                     filterSingleRowByFilterRules(Utils.eFormNames.FormHighlighFilter, row);
                 }
-                if (!m_includeFilterDict.Count.Equals(0) || !m_excludeFilterDict.Count.Equals(0))
+                if (!m_IncludeFilterDict.Count.Equals(0) || !m_ExcludeFilterDict.Count.Equals(0))
                 {
                     filterSingleRowByFilterRules(Utils.eFormNames.FormColumnFilter, row);
                 }
                 if (row.Visible && autoScroll)
                     dataGridView1.FirstDisplayedCell = row.Cells[(int)Utils.eColumnNames.ImpersonationLevel];
                 this.m_TotalNumberOfEvents += 1;
-                this.toolStripStatusLabelTotalEvents.Text = "Total events: " + this.m_TotalNumberOfEvents;
+                //this.toolStripStatusLabelTotalEvents.Text = "Total events: " + this.m_TotalNumberOfEvents;
             }
         }
 
@@ -429,6 +452,7 @@ namespace RPCMon
                 m_IsCaptureButtonPressed = true;
                 m_CaptureThread = new Thread(new ThreadStart(startEventTracing));
                 m_CaptureThread.Start();
+                timer1.Start();
             }
             else
             {
@@ -437,6 +461,8 @@ namespace RPCMon
                 m_TraceSession.Source.StopProcessing();
                 m_TraceSession.Dispose();
                 m_CaptureThread.Abort();
+                timer1.Stop();
+                updatetoolStripStatusLabelTotalEvents();
             }
         }
 
@@ -508,7 +534,7 @@ namespace RPCMon
         {
             m_highLightListView = i_ListView;
             updateFilterDicts(i_ListView, Utils.eFormNames.FormHighlighFilter);
-            if (m_includeHighlightDict.Count.Equals(0))
+            if (m_IncludeHighlightDict.Count.Equals(0))
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
@@ -722,11 +748,11 @@ namespace RPCMon
         {
             if(i_FormName == Utils.eFormNames.FormColumnFilter)
             {
-                filterRow(i_FormName, row, m_includeFilterDict, m_excludeFilterDict);
+                filterRow(i_FormName, row, m_IncludeFilterDict, m_ExcludeFilterDict);
             }
             else
             {
-                filterRow(i_FormName, row, m_includeHighlightDict, m_excludeHighlightDict);
+                filterRow(i_FormName, row, m_IncludeHighlightDict, m_ExcludeHighlightDict);
             }
         }
 
@@ -736,38 +762,38 @@ namespace RPCMon
             {
                 if (addToExcludeList)
                 {
-                    if (!m_excludeFilterDict.ContainsKey(rule.SubItems[0].Text))
+                    if (!m_ExcludeFilterDict.ContainsKey(rule.SubItems[0].Text))
                     {
-                        m_excludeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                        m_ExcludeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
                     }
-                    m_excludeFilterDict[rule.SubItems[0].Text].Add(rule);
+                    m_ExcludeFilterDict[rule.SubItems[0].Text].Add(rule);
                 }
                 else
                 {
-                    if (!m_includeFilterDict.ContainsKey(rule.SubItems[0].Text))
+                    if (!m_IncludeFilterDict.ContainsKey(rule.SubItems[0].Text))
                     {
-                        m_includeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                        m_IncludeFilterDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
                     }
-                    m_includeFilterDict[rule.SubItems[0].Text].Add(rule);
+                    m_IncludeFilterDict[rule.SubItems[0].Text].Add(rule);
                 }
             }
             else
             {
                 if (addToExcludeList)
                 {
-                    if (!m_excludeHighlightDict.ContainsKey(rule.SubItems[0].Text))
+                    if (!m_ExcludeHighlightDict.ContainsKey(rule.SubItems[0].Text))
                     {
-                        m_excludeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                        m_ExcludeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
                     }
-                    m_excludeHighlightDict[rule.SubItems[0].Text].Add(rule);
+                    m_ExcludeHighlightDict[rule.SubItems[0].Text].Add(rule);
                 }
                 else
                 {
-                    if (!m_includeHighlightDict.ContainsKey(rule.SubItems[0].Text))
+                    if (!m_IncludeHighlightDict.ContainsKey(rule.SubItems[0].Text))
                     {
-                        m_includeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
+                        m_IncludeHighlightDict.Add(rule.SubItems[0].Text, new List<ListViewItem>());
                     }
-                    m_includeHighlightDict[rule.SubItems[0].Text].Add(rule);
+                    m_IncludeHighlightDict[rule.SubItems[0].Text].Add(rule);
                 }
             } 
         }
@@ -776,13 +802,13 @@ namespace RPCMon
         {
             if (i_FormName == Utils.eFormNames.FormColumnFilter)
             {
-                m_includeFilterDict.Clear();
-                m_excludeFilterDict.Clear();
+                m_IncludeFilterDict.Clear();
+                m_ExcludeFilterDict.Clear();
             }
             else
             {
-                m_includeHighlightDict.Clear();
-                m_excludeHighlightDict.Clear();
+                m_IncludeHighlightDict.Clear();
+                m_ExcludeHighlightDict.Clear();
             }
             foreach (ListViewItem rule in i_ListView.Items)
             {
@@ -802,6 +828,11 @@ namespace RPCMon
             {
                 filterSingleRowByFilterRules(i_FormName, row);
             }
+            if (!m_IsCaptureButtonPressed)
+            {
+                updatetoolStripStatusLabelTotalEvents();
+            }
+            
         }
 
         private void ColumnFilter_OKFilter(ListView i_ListView)
@@ -809,7 +840,7 @@ namespace RPCMon
 
             m_filterListView = i_ListView;
             updateFilterDicts(i_ListView, Utils.eFormNames.FormColumnFilter);
-            if (m_includeFilterDict.Count.Equals(0))
+            if (m_IncludeFilterDict.Count.Equals(0))
             {
                 foreach (DataGridViewRow row in this.dataGridView1.Rows)
                 {
@@ -1201,7 +1232,15 @@ namespace RPCMon
 
         private void dataGridView1_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.All;
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if(fileList[0].Contains("json"))
+            {
+                e.Effect = DragDropEffects.All;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
 
         private void dataGridView1_DragDrop(object sender, DragEventArgs e)
@@ -1213,6 +1252,7 @@ namespace RPCMon
 
         private void importFile(string fileName)
         {
+            int counter = 0;
             string json = File.ReadAllText(fileName);
             try
             {
@@ -1222,6 +1262,7 @@ namespace RPCMon
                     DataGridViewRow row = new DataGridViewRow();
                     foreach (KeyValuePair<string, object> pair in item)
                     {
+                        counter++;
                         if (pair.Key.Equals("Highlighted"))
                         {
                             row.DefaultCellStyle.BackColor = pair.Value.Equals(false) ? Color.White : Color.Cyan;
@@ -1245,9 +1286,30 @@ namespace RPCMon
                 MessageBox.Show("Invalid File!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            toolStripStatusLabelTotalEvents.Text = "Total events: " + counter + " | Shown events: " + counter;
             MessageBox.Show("Import Completed!", "Import Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (autoScroll && m_IsCaptureButtonPressed)
+            {
+                autoScroll = false;
+                toolStripButtonAutoScroll.Image = global::RPCMon.Properties.Resources.scroll_disable;
+            }
+            int rowCount = 0;
+            HashSet<int> selectedRows = new HashSet<int>();
+
+            foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+            {
+                selectedRows.Add(cell.RowIndex);
+            }
+            rowCount = selectedRows.Count;
+            selectedEventsToolStrip.Text = "Selected events: " + rowCount;
+
+        }
+
         private void updateToolStripStatusLabelDBPath(string i_DBPath)
         {
             this.toolStripStatusLabelDBPath.Text = "DB File: " + Path.GetFileName(this.m_RPCDBPath);

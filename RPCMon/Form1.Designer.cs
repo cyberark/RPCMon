@@ -72,6 +72,7 @@
             this.ColumnImpersonationLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelTotalEvents = new System.Windows.Forms.ToolStripStatusLabel();
+            this.selectedEventsToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelDBPath = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTipDBPath = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripRightClickGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -332,6 +333,7 @@
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragDrop);
             this.dataGridView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragEnter);
             // 
@@ -442,6 +444,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelTotalEvents,
+            this.selectedEventsToolStrip,
             this.toolStripStatusLabelDBPath});
             this.statusStrip1.Location = new System.Drawing.Point(0, 538);
             this.statusStrip1.Name = "statusStrip1";
@@ -453,8 +456,14 @@
             // 
             this.toolStripStatusLabelTotalEvents.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabelTotalEvents.Name = "toolStripStatusLabelTotalEvents";
-            this.toolStripStatusLabelTotalEvents.Size = new System.Drawing.Size(85, 19);
-            this.toolStripStatusLabelTotalEvents.Text = "Total events: 0";
+            this.toolStripStatusLabelTotalEvents.Size = new System.Drawing.Size(107, 19);
+            this.toolStripStatusLabelTotalEvents.Text = "Shown events: 0/0";
+            // 
+            // selectedEventsToolStrip
+            // 
+            this.selectedEventsToolStrip.Name = "selectedEventsToolStrip";
+            this.selectedEventsToolStrip.Size = new System.Drawing.Size(100, 19);
+            this.selectedEventsToolStrip.Text = "Selected events: 0";
             // 
             // toolStripStatusLabelDBPath
             // 
@@ -563,6 +572,7 @@
         private System.Windows.Forms.ToolStripMenuItem importAllDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importAsIsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripStatusLabel selectedEventsToolStrip;
     }
 }
 

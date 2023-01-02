@@ -20,6 +20,7 @@ namespace RPCMon
         public ColumnFilter(ref ListView i_ListViewColumnFilter)
         {
             InitializeComponentWrapper();
+            this.AcceptButton = buttonOK;
             foreach (ListViewItem item in i_ListViewColumnFilter.Items)
             {
                 ListViewItem clonedItem = (ListViewItem)item.Clone();
