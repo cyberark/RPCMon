@@ -448,6 +448,8 @@ namespace RPCMon
 
             if (!m_IsCaptureButtonPressed)
             {
+                dataGridView1.Visible = true;
+                pictureBox1.Visible = false;
                 toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
                 m_IsCaptureButtonPressed = true;
                 m_CaptureThread = new Thread(new ThreadStart(startEventTracing));
@@ -588,7 +590,8 @@ namespace RPCMon
 
                 foreach (DataGridViewCell cell in dataGridView1.Rows[i].Cells)
                 {
-                    if (dataGridView1.Rows[i].Visible && cell.Value != null && cell.Value.ToString().Contains(i_SearchString))
+                    if (dataGridView1.Rows[i].Visible && cell.Value != null && ((cell.Value.ToString().Contains(i_SearchString) && i_MatchSensitive)) || 
+                   (cell.Value.ToString().ToLower().Contains(i_SearchString.ToLower()) && !i_MatchSensitive))
                     {
                         cleanAllSelectedCells();
                         dataGridView1.Rows[i].Selected = true;
@@ -665,28 +668,32 @@ namespace RPCMon
 
         private bool checkIfShouldBeVisable(ListViewItem rule, DataGridViewRow row, String key)
         {
-            DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
+            //DataGridViewCell cellValueFromGridViewCell = row.Cells["Column" + rule.SubItems[0].Text];
+            string dataFromCell = row.Cells["Column" + rule.SubItems[0].Text].Value.ToString();
+            string lowerDataFromCell = dataFromCell.ToLower();
             string valueFromFilter = rule.SubItems[(int)Utils.eFilterNames.Value].Text;
+            string lowerValueFromFilter = valueFromFilter.ToLower();
+            bool matchCase = rule.SubItems[(int)Utils.eFilterNames.MatchCase].Text.Equals("True");
             if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "contains")
             {
-                if (row.Cells["Column" + key].Value.ToString().Contains(rule.SubItems[(int)Utils.eFilterNames.Value].Text))
+                if ((dataFromCell.Contains(valueFromFilter) && matchCase) || 
+                    (lowerDataFromCell.Contains(lowerValueFromFilter) && !matchCase))
                 {
-                    if (cellValueFromGridViewCell.Value.ToString().Contains(valueFromFilter))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "is")
             {
-                if (cellValueFromGridViewCell.Value.ToString() == valueFromFilter)
+                if ((dataFromCell.Equals(valueFromFilter) && matchCase) ||
+                    (lowerDataFromCell.Equals(lowerValueFromFilter) && !matchCase))
                 {
                     return true;
                 }
             }
             else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "begins with")
             {
-                if (cellValueFromGridViewCell.Value.ToString().StartsWith(valueFromFilter))
+                if ((dataFromCell.StartsWith(valueFromFilter) && matchCase) ||
+                     (lowerDataFromCell.StartsWith(lowerValueFromFilter) && !matchCase))
                 {
                     return true;
                 }
@@ -694,7 +701,8 @@ namespace RPCMon
             else if (rule.SubItems[(int)Utils.eFilterNames.Relation].Text == "ends with")
             {
 
-                if (cellValueFromGridViewCell.Value.ToString().EndsWith(valueFromFilter))
+                if ((dataFromCell.EndsWith(valueFromFilter) && matchCase) ||
+                    (lowerDataFromCell.EndsWith(lowerValueFromFilter) && !matchCase))
                 {
                     return true;
                 }
@@ -972,11 +980,17 @@ namespace RPCMon
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
-        }
+            m_TotalNumberOfEvents = 0;
+            m_TotalShownEvents = 0;
+            dataGridView1.Visible = false;
+            pictureBox1.Visible = true;
+            updatetoolStripStatusLabelTotalEvents();
+    }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Authors: Eviatar Gerzi (@g3rzi) and Yaniv Yakobovich\nVersion: 1.2\n\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserved", "About");
+            FormAbout formAbout = new FormAbout();
+            formAbout.ShowDialog();
         }
 
         private void toolStripButtonFind_Click(object sender, EventArgs e)
@@ -1185,7 +1199,7 @@ namespace RPCMon
                 if (row.Visible)
                 {
                     JObject rowData = new JObject();
-                    rowData["Highlighted"] = row.DefaultCellStyle.BackColor != Color.White;
+                    rowData["Highlighted"] = row.DefaultCellStyle.BackColor == Color.Cyan;
                     rowData["Bold"] = row.DefaultCellStyle.Font.Bold;
                     foreach (DataGridViewColumn col in dataGridView1.Columns)
                     {
@@ -1230,28 +1244,10 @@ namespace RPCMon
 
         }
 
-        private void dataGridView1_DragEnter(object sender, DragEventArgs e)
-        {
-            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            if(fileList[0].Contains("json"))
-            {
-                e.Effect = DragDropEffects.All;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void dataGridView1_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            importFile(fileList[0]);
-
-        }
-
         private void importFile(string fileName)
         {
+            dataGridView1.Visible = true;
+            pictureBox1.Visible = false;
             int counter = 0;
             string json = File.ReadAllText(fileName);
             try
@@ -1308,6 +1304,40 @@ namespace RPCMon
             rowCount = selectedRows.Count;
             selectedEventsToolStrip.Text = "Selected events: " + rowCount;
 
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            int x = (this.ClientSize.Width - pictureBox1.Width) / 2;
+            int y = (this.ClientSize.Height - pictureBox1.Height) / 2;
+
+            // Set the Location and Size of the PictureBox to center it
+            pictureBox1.Location = new Point(x, y);
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            importFile(fileList[0]);
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string jsonString = File.ReadAllText(filePaths[0]);
+
+                try
+                {
+                    var obj = JsonConvert.DeserializeObject(jsonString);
+                    e.Effect = DragDropEffects.All;
+                }
+                catch (JsonException ex)
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
         }
 
         private void updateToolStripStatusLabelDBPath(string i_DBPath)

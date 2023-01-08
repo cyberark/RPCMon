@@ -16,7 +16,7 @@ namespace RPCMon.Control
         public static event DoneRPCSearchEventHandler DoneRPCSearchUpdate;
         private const string m_SymbolsPath = @"srv*c:\symbols*http://msdl.microsoft.com/download/symbols";
         private static List<IEnumerable<NtApiDotNet.Win32.RpcServer>> m_RPCServersDB;
-        private static string m_DbgHelp = @"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\dbghelp.dll";
+        private static string m_DbgHelp = @"C:\Windows\system32\dbghelp.dll";
         private static int m_TotalNumberOfFiles, m_NumOfFilesWithRPC;
         private const string c_FolderToSearch = @"C:\Windows\";
         private static bool m_IsDoneRPCSearch = false;

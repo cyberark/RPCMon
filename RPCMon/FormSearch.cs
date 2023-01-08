@@ -38,7 +38,7 @@ namespace RPCMon
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
-            OnSearchForMatch(comboBox1.Text, radioButtonDown.Checked, false, false);
+            OnSearchForMatch(comboBox1.Text, radioButtonDown.Checked, false, caseSensitiveCheckBox.Checked);
         }
     }
 }

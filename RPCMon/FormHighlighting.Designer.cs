@@ -45,6 +45,8 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
+            this.CaseSensitiveCheckBox = new System.Windows.Forms.CheckBox();
+            this.columnCaseSensitive = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // labelHighlight
@@ -140,7 +142,8 @@
             this.columnHeaderColumn,
             this.columnHeaderRelation,
             this.columnHeaderValue,
-            this.columnHeaderAction});
+            this.columnHeaderAction,
+            this.columnCaseSensitive});
             this.listViewHighlights.HideSelection = false;
             this.listViewHighlights.Location = new System.Drawing.Point(12, 85);
             this.listViewHighlights.Name = "listViewHighlights";
@@ -232,11 +235,27 @@
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
+            // CaseSensitiveCheckBox
+            // 
+            this.CaseSensitiveCheckBox.AutoSize = true;
+            this.CaseSensitiveCheckBox.Location = new System.Drawing.Point(216, 53);
+            this.CaseSensitiveCheckBox.Name = "CaseSensitiveCheckBox";
+            this.CaseSensitiveCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.CaseSensitiveCheckBox.TabIndex = 13;
+            this.CaseSensitiveCheckBox.Text = "Match Case";
+            this.CaseSensitiveCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // columnCaseSensitive
+            // 
+            this.columnCaseSensitive.Text = "Match Case";
+            this.columnCaseSensitive.Width = 90;
+            // 
             // FormHighlighting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 393);
+            this.Controls.Add(this.CaseSensitiveCheckBox);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonRemove);
@@ -279,5 +298,7 @@
         private System.Windows.Forms.ColumnHeader columnHeaderAction;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.ColumnHeader columnCaseSensitive;
+        private System.Windows.Forms.CheckBox CaseSensitiveCheckBox;
     }
 }

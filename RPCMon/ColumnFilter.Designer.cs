@@ -45,6 +45,8 @@
             this.labelThen = new System.Windows.Forms.Label();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
+            this.CaseSensitiveCheckBox = new System.Windows.Forms.CheckBox();
+            this.columnMatchCase = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -117,7 +119,8 @@
             this.columnHeaderColumn,
             this.columnHeaderRelation,
             this.columnHeaderValue,
-            this.columnHeaderAction});
+            this.columnHeaderAction,
+            this.columnMatchCase});
             this.listViewColumnFilters.HideSelection = false;
             this.listViewColumnFilters.Location = new System.Drawing.Point(15, 85);
             this.listViewColumnFilters.Name = "listViewColumnFilters";
@@ -233,11 +236,27 @@
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
+            // CaseSensitiveCheckBox
+            // 
+            this.CaseSensitiveCheckBox.AutoSize = true;
+            this.CaseSensitiveCheckBox.Location = new System.Drawing.Point(244, 53);
+            this.CaseSensitiveCheckBox.Name = "CaseSensitiveCheckBox";
+            this.CaseSensitiveCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.CaseSensitiveCheckBox.TabIndex = 14;
+            this.CaseSensitiveCheckBox.Text = "Match Case";
+            this.CaseSensitiveCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // columnMatchCase
+            // 
+            this.columnMatchCase.Text = "Case Sensitive";
+            this.columnMatchCase.Width = 87;
+            // 
             // ColumnFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CaseSensitiveCheckBox);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.labelThen);
@@ -278,5 +297,7 @@
         private System.Windows.Forms.Label labelThen;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.ColumnHeader columnMatchCase;
+        private System.Windows.Forms.CheckBox CaseSensitiveCheckBox;
     }
 }
