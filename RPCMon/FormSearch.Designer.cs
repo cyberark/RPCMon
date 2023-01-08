@@ -33,8 +33,9 @@
             this.buttonFind = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxDirection = new System.Windows.Forms.GroupBox();
-            this.radioButtonUp = new System.Windows.Forms.RadioButton();
             this.radioButtonDown = new System.Windows.Forms.RadioButton();
+            this.radioButtonUp = new System.Windows.Forms.RadioButton();
+            this.caseSensitiveCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBoxDirection.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,16 +87,6 @@
             this.groupBoxDirection.TabStop = false;
             this.groupBoxDirection.Text = "Direction";
             // 
-            // radioButtonUp
-            // 
-            this.radioButtonUp.AutoSize = true;
-            this.radioButtonUp.Location = new System.Drawing.Point(7, 29);
-            this.radioButtonUp.Name = "radioButtonUp";
-            this.radioButtonUp.Size = new System.Drawing.Size(39, 17);
-            this.radioButtonUp.TabIndex = 0;
-            this.radioButtonUp.Text = "Up";
-            this.radioButtonUp.UseVisualStyleBackColor = true;
-            // 
             // radioButtonDown
             // 
             this.radioButtonDown.AutoSize = true;
@@ -108,11 +99,32 @@
             this.radioButtonDown.Text = "Down";
             this.radioButtonDown.UseVisualStyleBackColor = true;
             // 
+            // radioButtonUp
+            // 
+            this.radioButtonUp.AutoSize = true;
+            this.radioButtonUp.Location = new System.Drawing.Point(7, 29);
+            this.radioButtonUp.Name = "radioButtonUp";
+            this.radioButtonUp.Size = new System.Drawing.Size(39, 17);
+            this.radioButtonUp.TabIndex = 0;
+            this.radioButtonUp.Text = "Up";
+            this.radioButtonUp.UseVisualStyleBackColor = true;
+            // 
+            // caseSensitiveCheckBox
+            // 
+            this.caseSensitiveCheckBox.AutoSize = true;
+            this.caseSensitiveCheckBox.Location = new System.Drawing.Point(76, 41);
+            this.caseSensitiveCheckBox.Name = "caseSensitiveCheckBox";
+            this.caseSensitiveCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.caseSensitiveCheckBox.TabIndex = 5;
+            this.caseSensitiveCheckBox.Text = "Match Case";
+            this.caseSensitiveCheckBox.UseVisualStyleBackColor = true;
+            // 
             // FormSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 144);
+            this.Controls.Add(this.caseSensitiveCheckBox);
             this.Controls.Add(this.groupBoxDirection);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonFind);
@@ -139,5 +151,6 @@
         private System.Windows.Forms.GroupBox groupBoxDirection;
         private System.Windows.Forms.RadioButton radioButtonDown;
         private System.Windows.Forms.RadioButton radioButtonUp;
+        private System.Windows.Forms.CheckBox caseSensitiveCheckBox;
     }
 }

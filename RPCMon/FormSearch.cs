@@ -20,6 +20,7 @@ namespace RPCMon
         public FormSearch()
         {
             InitializeComponent();
+            this.AcceptButton = buttonFind;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace RPCMon
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
-            OnSearchForMatch(comboBox1.Text, radioButtonDown.Checked, false, false);
+            OnSearchForMatch(comboBox1.Text, radioButtonDown.Checked, false, caseSensitiveCheckBox.Checked);
         }
     }
 }

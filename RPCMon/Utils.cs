@@ -34,7 +34,7 @@ namespace RPCMon
 
         public enum eFilterNames
         {
-            Column, Relation, Value, Action
+            Column, Relation, Value, Action, MatchCase
         }
 
         public enum eFormNames

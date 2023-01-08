@@ -19,6 +19,7 @@ namespace RPCMon
         public FormHighlighting(ref ListView i_ListViewHighlighFilter)
         {
             InitializeComponentWrapper();
+            this.AcceptButton = buttonOK;
 
             foreach (ListViewItem item in i_ListViewHighlighFilter.Items)
             {
@@ -39,10 +40,10 @@ namespace RPCMon
 
         // DUPLICATED function in ColumnFilter
         // Maybe create a shared function in Utils but it threw an exception for "type initializer"
-        private bool isRowExist(string i_Column, string i_Relation, string i_Value, string i_Action)
+        private bool isRowExist(string i_Column, string i_Relation, string i_Value, string i_Action, string i_MatchCase)
         {
             bool isExist = false;
-            string newRow = i_Column + i_Relation + i_Value + i_Action;
+            string newRow = i_Column + i_Relation + i_Value + i_Action + i_MatchCase;
             foreach (ListViewItem item in listViewHighlights.Items)
             {
                 string rawRow = "";
@@ -64,12 +65,13 @@ namespace RPCMon
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (!isRowExist(comboBoxColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text) && !comboBoxValue.Text.Equals(""))
+            if (!isRowExist(comboBoxColumn.Text, comboBoxRelation.Text, comboBoxValue.Text, comboBoxAction.Text, CaseSensitiveCheckBox.Checked.ToString()) && !comboBoxValue.Text.Equals(""))
             {
                 ListViewItem item = new ListViewItem(comboBoxColumn.Text);
                 item.SubItems.Add(comboBoxRelation.Text);
                 item.SubItems.Add(comboBoxValue.Text);
                 item.SubItems.Add(comboBoxAction.Text);
+                item.SubItems.Add(CaseSensitiveCheckBox.Checked.ToString());
                 item.Checked = true;
                 this.listViewHighlights.Items.Add(item);
             }
@@ -96,6 +98,7 @@ namespace RPCMon
                 this.comboBoxRelation.Text = item.SubItems[1].Text;
                 this.comboBoxValue.Text = item.SubItems[2].Text;
                 this.comboBoxAction.Text = item.SubItems[3].Text;
+                this.CaseSensitiveCheckBox.Checked = item.SubItems[4].Equals("True");
                 item.Remove();
             }
         }
