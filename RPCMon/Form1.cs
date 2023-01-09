@@ -32,7 +32,7 @@ namespace RPCMon
         private Thread m_CaptureThread;
         private int m_TotalNumberOfEvents = 0;
         private int m_TotalShownEvents = 0;
-        private Timer timer1;
+        private Timer m_Timer;
         private const string RPC_DB_KEY_Module = "Module";
         private const string RPC_DB_KEY_ModulePath = "ModulePath";
         private const string RPC_DB_KEY_ProceduresCount = "ProceduresCount";
@@ -58,9 +58,9 @@ namespace RPCMon
         {
             InitializeComponent();
             configureFormBasedPrivileges();
-            timer1 = new Timer();
-            timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Interval = 100; // in miliseconds
+            m_Timer = new Timer();
+            m_Timer.Tick += new EventHandler(timer1_Tick);
+            m_Timer.Interval = 100; // in miliseconds
            // timer1.Start();
 
             this.m_RPCDBPath = getDBFromCurrentFolder();
@@ -454,7 +454,7 @@ namespace RPCMon
                 m_IsCaptureButtonPressed = true;
                 m_CaptureThread = new Thread(new ThreadStart(startEventTracing));
                 m_CaptureThread.Start();
-                timer1.Start();
+                m_Timer.Start();
             }
             else
             {
@@ -463,7 +463,7 @@ namespace RPCMon
                 m_TraceSession.Source.StopProcessing();
                 m_TraceSession.Dispose();
                 m_CaptureThread.Abort();
-                timer1.Stop();
+                m_Timer.Stop();
                 updatetoolStripStatusLabelTotalEvents();
             }
         }
@@ -1177,12 +1177,7 @@ namespace RPCMon
             JArray data = new JArray();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                JObject rowData = new JObject();
-                foreach (DataGridViewColumn col in dataGridView1.Columns)
-                {
-                    rowData[col.HeaderText] = (string)row.Cells[col.Index].Value;
-                }
-                data.Add(rowData);
+                addRowToJson(data, row, false);
             }
             string json = data.ToString();
             File.WriteAllText(filePath, json);
@@ -1198,15 +1193,7 @@ namespace RPCMon
             {
                 if (row.Visible)
                 {
-                    JObject rowData = new JObject();
-                    rowData["Highlighted"] = row.DefaultCellStyle.BackColor == Color.Cyan;
-                    rowData["Bold"] = row.DefaultCellStyle.Font.Bold;
-                    foreach (DataGridViewColumn col in dataGridView1.Columns)
-                    {
-                        rowData[col.HeaderText] = (string)row.Cells[col.Index].Value;
-
-                    }
-                    data.Add(rowData);
+                    addRowToJson(data, row, true);
                 }
                 
             }
@@ -1214,6 +1201,24 @@ namespace RPCMon
             File.WriteAllText(filePath, json);
             MessageBox.Show("Export Completed!");
         }
+
+        private void addRowToJson(JArray data, DataGridViewRow row, bool exportAsIs)
+        {
+            JObject rowData = new JObject();
+            if (exportAsIs)
+            {
+                rowData["Highlighted"] = row.DefaultCellStyle.BackColor == Color.Cyan;
+                rowData["Bold"] = row.DefaultCellStyle.Font.Bold;
+            }
+            
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                rowData[col.HeaderText] = (string)row.Cells[col.Index].Value;
+
+            }
+            data.Add(rowData);
+        }
+
         private string saveFilePath()
         {
             string filePath = "";
