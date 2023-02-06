@@ -79,6 +79,7 @@
             this.ColumnAuthenticationLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAuthenticationService = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnImpersonationLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -326,7 +327,8 @@
             this.ColumnOptions,
             this.ColumnAuthenticationLevel,
             this.ColumnAuthenticationService,
-            this.ColumnImpersonationLevel});
+            this.ColumnImpersonationLevel,
+            this.ColumnTimeStamp});
             this.dataGridView1.Location = new System.Drawing.Point(0, 51);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -507,6 +509,13 @@
             this.ColumnImpersonationLevel.Name = "ColumnImpersonationLevel";
             this.ColumnImpersonationLevel.ReadOnly = true;
             // 
+            // ColumnTimeStamp
+            // 
+            this.ColumnTimeStamp.HeaderText = "TimeStamp";
+            this.ColumnTimeStamp.Name = "ColumnTimeStamp";
+            this.ColumnTimeStamp.ReadOnly = true;
+            this.ColumnTimeStamp.Visible = false;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -591,6 +600,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthenticationLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthenticationService;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnImpersonationLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimeStamp;
     }
 }
 

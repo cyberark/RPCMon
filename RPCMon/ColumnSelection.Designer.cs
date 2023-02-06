@@ -48,10 +48,11 @@ namespace RPCMon
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxRPCServer = new System.Windows.Forms.GroupBox();
+            this.checkBoxFunction = new System.Windows.Forms.CheckBox();
             this.checkBoxModulePath = new System.Windows.Forms.CheckBox();
             this.checkBoxModule = new System.Windows.Forms.CheckBox();
             this.checkBoxProceduresCount = new System.Windows.Forms.CheckBox();
-            this.checkBoxFunction = new System.Windows.Forms.CheckBox();
+            this.checkBoxTimeStamp = new System.Windows.Forms.CheckBox();
             this.groupBoxProcessManagement.SuspendLayout();
             this.groupBoxRPC.SuspendLayout();
             this.groupBoxRPCServer.SuspendLayout();
@@ -72,7 +73,6 @@ namespace RPCMon
             // checkBoxProcessName
             // 
             this.checkBoxProcessName.AutoSize = true;
-            // this.checkBoxProcessName.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxProcessName.Location = new System.Drawing.Point(6, 53);
             this.checkBoxProcessName.Name = "checkBoxProcessName";
             this.checkBoxProcessName.Size = new System.Drawing.Size(92, 17);
@@ -83,7 +83,6 @@ namespace RPCMon
             // checkBoxTID
             // 
             this.checkBoxTID.AutoSize = true;
-            // this.checkBoxTID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxTID.Location = new System.Drawing.Point(132, 30);
             this.checkBoxTID.Name = "checkBoxTID";
             this.checkBoxTID.Size = new System.Drawing.Size(44, 17);
@@ -94,7 +93,6 @@ namespace RPCMon
             // checkBoxPID
             // 
             this.checkBoxPID.AutoSize = true;
-            // this.checkBoxPID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxPID.Location = new System.Drawing.Point(7, 30);
             this.checkBoxPID.Name = "checkBoxPID";
             this.checkBoxPID.Size = new System.Drawing.Size(44, 17);
@@ -113,6 +111,7 @@ namespace RPCMon
             // 
             // groupBoxRPC
             // 
+            this.groupBoxRPC.Controls.Add(this.checkBoxTimeStamp);
             this.groupBoxRPC.Controls.Add(this.checkBoxImpersonationLevel);
             this.groupBoxRPC.Controls.Add(this.checkBoxAuthenticationLevel);
             this.groupBoxRPC.Controls.Add(this.checkBoxAuthenticationService);
@@ -130,7 +129,6 @@ namespace RPCMon
             // checkBoxImpersonationLevel
             // 
             this.checkBoxImpersonationLevel.AutoSize = true;
-            // this.checkBoxImpersonationLevel.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxImpersonationLevel.Location = new System.Drawing.Point(8, 97);
             this.checkBoxImpersonationLevel.Name = "checkBoxImpersonationLevel";
             this.checkBoxImpersonationLevel.Size = new System.Drawing.Size(118, 17);
@@ -171,7 +169,6 @@ namespace RPCMon
             // checkBoxEndpoint
             // 
             this.checkBoxEndpoint.AutoSize = true;
-            // this.checkBoxEndpoint.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEndpoint.Location = new System.Drawing.Point(7, 51);
             this.checkBoxEndpoint.Name = "checkBoxEndpoint";
             this.checkBoxEndpoint.Size = new System.Drawing.Size(68, 17);
@@ -182,7 +179,6 @@ namespace RPCMon
             // checkBoxProtocol
             // 
             this.checkBoxProtocol.AutoSize = true;
-            // this.checkBoxProtocol.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxProtocol.Location = new System.Drawing.Point(133, 28);
             this.checkBoxProtocol.Name = "checkBoxProtocol";
             this.checkBoxProtocol.Size = new System.Drawing.Size(65, 17);
@@ -203,7 +199,6 @@ namespace RPCMon
             // checkBoxService
             // 
             this.checkBoxService.AutoSize = true;
-            // this.checkBoxService.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxService.Location = new System.Drawing.Point(132, 76);
             this.checkBoxService.Name = "checkBoxService";
             this.checkBoxService.Size = new System.Drawing.Size(62, 17);
@@ -214,7 +209,6 @@ namespace RPCMon
             // checkBoxUUID
             // 
             this.checkBoxUUID.AutoSize = true;
-            // this.checkBoxUUID.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxUUID.Location = new System.Drawing.Point(6, 30);
             this.checkBoxUUID.Name = "checkBoxUUID";
             this.checkBoxUUID.Size = new System.Drawing.Size(53, 17);
@@ -257,6 +251,16 @@ namespace RPCMon
             this.groupBoxRPCServer.TabStop = false;
             this.groupBoxRPCServer.Text = "RPC Server";
             // 
+            // checkBoxFunction
+            // 
+            this.checkBoxFunction.AutoSize = true;
+            this.checkBoxFunction.Location = new System.Drawing.Point(7, 76);
+            this.checkBoxFunction.Name = "checkBoxFunction";
+            this.checkBoxFunction.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxFunction.TabIndex = 3;
+            this.checkBoxFunction.Text = "Function";
+            this.checkBoxFunction.UseVisualStyleBackColor = true;
+            // 
             // checkBoxModulePath
             // 
             this.checkBoxModulePath.AutoSize = true;
@@ -270,7 +274,6 @@ namespace RPCMon
             // checkBoxModule
             // 
             this.checkBoxModule.AutoSize = true;
-            // this.checkBoxModule.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxModule.Location = new System.Drawing.Point(132, 30);
             this.checkBoxModule.Name = "checkBoxModule";
             this.checkBoxModule.Size = new System.Drawing.Size(61, 17);
@@ -288,16 +291,15 @@ namespace RPCMon
             this.checkBoxProceduresCount.Text = "ProceduresCount";
             this.checkBoxProceduresCount.UseVisualStyleBackColor = true;
             // 
-            // checkBoxFunction
+            // checkBoxTimeStamp
             // 
-            this.checkBoxFunction.AutoSize = true;
-            // this.checkBoxFunction.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxFunction.Location = new System.Drawing.Point(7, 76);
-            this.checkBoxFunction.Name = "checkBoxFunction";
-            this.checkBoxFunction.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxFunction.TabIndex = 3;
-            this.checkBoxFunction.Text = "Function";
-            this.checkBoxFunction.UseVisualStyleBackColor = true;
+            this.checkBoxTimeStamp.AutoSize = true;
+            this.checkBoxTimeStamp.Location = new System.Drawing.Point(132, 97);
+            this.checkBoxTimeStamp.Name = "checkBoxTimeStamp";
+            this.checkBoxTimeStamp.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxTimeStamp.TabIndex = 9;
+            this.checkBoxTimeStamp.Text = "TimeStamp";
+            this.checkBoxTimeStamp.UseVisualStyleBackColor = true;
             // 
             // ColumnSelection
             // 
@@ -350,5 +352,6 @@ namespace RPCMon
         private System.Windows.Forms.CheckBox checkBoxModulePath;
         private System.Windows.Forms.CheckBox checkBoxModule;
         private System.Windows.Forms.CheckBox checkBoxProceduresCount;
+        private System.Windows.Forms.CheckBox checkBoxTimeStamp;
     }
 }
