@@ -39,6 +39,7 @@
             this.columnHeaderRelation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnCaseSensitive = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
             this.CaseSensitiveCheckBox = new System.Windows.Forms.CheckBox();
-            this.columnCaseSensitive = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // labelHighlight
@@ -78,7 +78,8 @@
             "Options",
             "AuthenticationLevel",
             "AuthenticationService",
-            "ImpersonationLevel"});
+            "ImpersonationLevel",
+            "TimeStamp"});
             this.comboBoxColumn.Location = new System.Drawing.Point(12, 25);
             this.comboBoxColumn.Name = "comboBoxColumn";
             this.comboBoxColumn.Size = new System.Drawing.Size(121, 21);
@@ -169,6 +170,11 @@
             // 
             this.columnHeaderAction.Text = "Action";
             // 
+            // columnCaseSensitive
+            // 
+            this.columnCaseSensitive.Text = "Match Case";
+            this.columnCaseSensitive.Width = 90;
+            // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -244,11 +250,6 @@
             this.CaseSensitiveCheckBox.TabIndex = 13;
             this.CaseSensitiveCheckBox.Text = "Match Case";
             this.CaseSensitiveCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // columnCaseSensitive
-            // 
-            this.columnCaseSensitive.Text = "Match Case";
-            this.columnCaseSensitive.Width = 90;
             // 
             // FormHighlighting
             // 
