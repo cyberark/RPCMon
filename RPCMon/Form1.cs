@@ -375,6 +375,7 @@ namespace RPCMon
 
                 row.Cells[(int)Utils.eColumnNames.PID].Value = i_Event.ProcessID.ToString();
                 row.Cells[(int)Utils.eColumnNames.TID].Value = i_Event.ThreadID.ToString();
+                
                 setProcessName(i_Event, ref row);
 
                 row.Cells[(int)Utils.eColumnNames.UUID].Value = i_Event.InterfaceUuid.ToString();
@@ -388,6 +389,7 @@ namespace RPCMon
                 row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = i_Event.NetworkAddress.ToString();
                 row.Cells[(int)Utils.eColumnNames.Protocol].Value = i_Event.Protocol.ToString();
                 row.Cells[(int)Utils.eColumnNames.Endpoint].Value = i_Event.Endpoint.ToString();
+                row.Cells[(int)Utils.eColumnNames.TimeStamp].Value = i_Event.TimeStamp.ToString("dd/MMM/yyyy hh:mm:ss.fff tt");
 
                 row.Cells[(int)Utils.eColumnNames.Options].Value = i_Event.Options.ToString();
                 row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = i_Event.AuthenticationLevel.ToString();
