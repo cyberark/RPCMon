@@ -37,6 +37,7 @@
             this.columnHeaderRelation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnMatchCase = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.comboBoxAction = new System.Windows.Forms.ComboBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
             this.CaseSensitiveCheckBox = new System.Windows.Forms.CheckBox();
-            this.columnMatchCase = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -79,7 +79,8 @@
             "Options",
             "AuthenticationLevel",
             "AuthenticationService",
-            "ImpersonationLevel"});
+            "ImpersonationLevel",
+            "TimeStamp"});
             this.comboBoxSearchByColumn.Location = new System.Drawing.Point(12, 25);
             this.comboBoxSearchByColumn.Name = "comboBoxSearchByColumn";
             this.comboBoxSearchByColumn.Size = new System.Drawing.Size(121, 21);
@@ -146,6 +147,11 @@
             // columnHeaderAction
             // 
             this.columnHeaderAction.Text = "Action";
+            // 
+            // columnMatchCase
+            // 
+            this.columnMatchCase.Text = "Case Sensitive";
+            this.columnMatchCase.Width = 87;
             // 
             // comboBoxAction
             // 
@@ -245,11 +251,6 @@
             this.CaseSensitiveCheckBox.TabIndex = 14;
             this.CaseSensitiveCheckBox.Text = "Match Case";
             this.CaseSensitiveCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // columnMatchCase
-            // 
-            this.columnMatchCase.Text = "Case Sensitive";
-            this.columnMatchCase.Width = 87;
             // 
             // ColumnFilter
             // 
