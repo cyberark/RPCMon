@@ -90,6 +90,7 @@
       <DependentUpon>ColumnSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\Engine.cs" />
+    <Compile Include="Control\EventWrapper.cs" />
     <Compile Include="Control\Microsoft-Windows-RPC.cs" />
     <Compile Include="Control\RPCServerInfo.cs" />
     <Compile Include="Control\Win32NativeMethods.cs" />

@@ -53,6 +53,7 @@ namespace RPCMon
         private IDictionary<string, List<ListViewItem>> m_ExcludeFilterDict = new Dictionary<string, List<ListViewItem>>();
         private IDictionary<string, List<ListViewItem>> m_IncludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
         private IDictionary<string, List<ListViewItem>> m_ExcludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
+        private bool[] m_IncludeEvents = { true, true, false, false }; 
 
         public Form1()
         {
@@ -61,8 +62,8 @@ namespace RPCMon
             m_Timer = new Timer();
             m_Timer.Tick += new EventHandler(timer1_Tick);
             m_Timer.Interval = 100; // in miliseconds
-           // timer1.Start();
-
+            // timer1.Start();
+            Center_Picture();
             this.m_RPCDBPath = getDBFromCurrentFolder();
             this.toolStripStatusLabelDBPath.Text = "DB File: " + Path.GetFileName(this.m_RPCDBPath);
             Process[] processCollection = Process.GetProcesses();
@@ -313,28 +314,46 @@ namespace RPCMon
 
                 session.EnableProvider("Microsoft-Windows-RPC", Microsoft.Diagnostics.Tracing.TraceEventLevel.Verbose);
                 var parser = new MicrosoftWindowsRPCTraceEventParser(session.Source);
-
-                // Do we want to include more events? server events?
-
-                parser.RpcClientCallStart += e2 =>
+                if (m_IncludeEvents[(int)Utils.eEvents.ServerStart])
                 {
-                    // addEventToListView(e2);
-                    //filterRowsByFilterRules(highLightListView, highLightFormName);
-                    addEventToDataGridView(e2);
+                    parser.RpcServerCallStart += e2 =>
+                    {
+                        EventWrapper eventWrapper = new EventWrapper(e2);
+                        addEventToDataGridView(eventWrapper);
+                    };
+                }
+                
+                if (m_IncludeEvents[(int)Utils.eEvents.ClientStart])
+                {
+                    parser.RpcClientCallStart += e2 =>
+                    {
+                        EventWrapper eventWrapper = new EventWrapper(e2);
+                        addEventToDataGridView(eventWrapper);
+                    };
+                }
 
-                    /* 
-                      // Throws an error "Cross-thread operation not valid: Control 'textBox1' accessed from a thread other than the thread it was created on."
-                     string funcName = getFunctionName(e2.InterfaceUuid.ToString(), e2.ProcNum);
-                     ListViewItem item = new ListViewItem(e2.ProcessID.ToString());
-                     item.SubItems.Add(e2.ThreadID.ToString());
-                     item.SubItems.Add(e2.InterfaceUuid.ToString());
-                     item.SubItems.Add(funcName);
-                     listView1.Items.Add(item);*/
-                    // Console.WriteLine($"{e2.ID}                {funcName}");
-                };
+                if (m_IncludeEvents[(int)Utils.eEvents.ClientStop])
+                {
+                    parser.RpcClientCallStop7 += e2 =>
+                    {
+                        EventWrapper eventWrapper = new EventWrapper(e2);
+                        addEventToDataGridView(eventWrapper);
+                    };
+                }
+
+                if (m_IncludeEvents[(int)Utils.eEvents.ServerStop])
+                {
+                    parser.RpcServerCallStop += e2 =>
+                    {
+                        EventWrapper eventWrapper = new EventWrapper(e2);
+                        addEventToDataGridView(eventWrapper);
+                    };
+                }
+                
                 session.Source.Process();
             }
         }
+
 
         private void setRpcFields(ref DataGridViewRow i_Row, string i_UUID)
         {
@@ -355,8 +374,12 @@ namespace RPCMon
         }
 
         // https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-make-thread-safe-calls?view=netdesktop-6.0
-        private delegate void addEventToDataGridViewCallBack(Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC.RpcClientCallStartArgs_V1TraceData i_Event);
-        private void addEventToDataGridView(Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC.RpcClientCallStartArgs_V1TraceData i_Event)
+        private delegate void addEventToDataGridViewCallBack(EventWrapper i_Event);
+       
+
+        
+
+        private void addEventToDataGridView(EventWrapper i_Event)
         {
             if (this.InvokeRequired)
             {
@@ -372,10 +395,10 @@ namespace RPCMon
                 row.CreateCells(dataGridView1);
                 //dataGridView1.Rows.Add(cells);
                 //dataGridView1.Rows[0].Cells[0].Value = "";
-
+                
                 row.Cells[(int)Utils.eColumnNames.PID].Value = i_Event.ProcessID.ToString();
                 row.Cells[(int)Utils.eColumnNames.TID].Value = i_Event.ThreadID.ToString();
-                
+
                 setProcessName(i_Event, ref row);
 
                 row.Cells[(int)Utils.eColumnNames.UUID].Value = i_Event.InterfaceUuid.ToString();
@@ -386,11 +409,11 @@ namespace RPCMon
 
                 row.Cells[(int)Utils.eColumnNames.Function].Value = funcName;
 
-                row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = i_Event.NetworkAddress.ToString();
-                row.Cells[(int)Utils.eColumnNames.Protocol].Value = i_Event.Protocol.ToString();
-                row.Cells[(int)Utils.eColumnNames.Endpoint].Value = i_Event.Endpoint.ToString();
-                row.Cells[(int)Utils.eColumnNames.TimeStamp].Value = i_Event.TimeStamp.ToString("dd/MMM/yyyy hh:mm:ss.fff tt");
-
+                row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = i_Event.NetworkAddress;
+                row.Cells[(int)Utils.eColumnNames.Protocol].Value = i_Event.Protocol;
+                row.Cells[(int)Utils.eColumnNames.Endpoint].Value = i_Event.Endpoint;
+                row.Cells[(int)Utils.eColumnNames.TimeStamp].Value = i_Event.TimeStamp;
+                row.Cells[(int)Utils.eColumnNames.Task].Value = i_Event.TaskName;
                 row.Cells[(int)Utils.eColumnNames.Options].Value = i_Event.Options.ToString();
                 row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = i_Event.AuthenticationLevel.ToString();
                 row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = i_Event.AuthenticationService.ToString();
@@ -412,7 +435,63 @@ namespace RPCMon
             }
         }
 
-        private void setProcessName(Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC.RpcClientCallStartArgs_V1TraceData i_Event, ref DataGridViewRow row)
+        //private void addEventToDataGridView(Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsRPC.RpcClientCallStartArgs_V1TraceData i_Event)
+        //{
+        //    if (this.InvokeRequired)
+        //    {
+        //        addEventToDataGridViewCallBack s = new addEventToDataGridViewCallBack(addEventToDataGridView);
+        //        this.Invoke(s, i_Event);
+        //    }
+        //    else
+        //    {
+        //        string funcName = getFunctionName(i_Event.InterfaceUuid.ToString(), i_Event.ProcNum);
+
+        //        //DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+        //        DataGridViewRow row = new DataGridViewRow();
+        //        row.CreateCells(dataGridView1);
+        //        //dataGridView1.Rows.Add(cells);
+        //        //dataGridView1.Rows[0].Cells[0].Value = "";
+
+        //        row.Cells[(int)Utils.eColumnNames.PID].Value = i_Event.ProcessID.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.TID].Value = i_Event.ThreadID.ToString();
+
+        //        setProcessName(i_Event, ref row);
+
+        //        row.Cells[(int)Utils.eColumnNames.UUID].Value = i_Event.InterfaceUuid.ToString();
+        //        if (i_Event.InterfaceUuid.ToString() != null && i_Event.InterfaceUuid.ToString() != "")
+        //        {
+        //            setRpcFields(ref row, i_Event.InterfaceUuid.ToString());
+        //        }
+
+        //        row.Cells[(int)Utils.eColumnNames.Function].Value = funcName;
+
+        //        row.Cells[(int)Utils.eColumnNames.NetworkAddress].Value = i_Event.NetworkAddress.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.Protocol].Value = i_Event.Protocol.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.Endpoint].Value = i_Event.Endpoint.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.TimeStamp].Value = i_Event.TimeStamp.ToString("dd/MMM/yyyy hh:mm:ss.fff tt");
+
+        //        row.Cells[(int)Utils.eColumnNames.Options].Value = i_Event.Options.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.AuthenticationLevel].Value = i_Event.AuthenticationLevel.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.AuthenticationService].Value = i_Event.AuthenticationService.ToString();
+        //        row.Cells[(int)Utils.eColumnNames.ImpersonationLevel].Value = i_Event.ImpersonationLevel.ToString();
+        //        row.DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Regular);
+        //        dataGridView1.Rows.Add(row);
+        //        if (!m_IncludeHighlightDict.Count.Equals(0) || !m_ExcludeHighlightDict.Count.Equals(0))
+        //        {
+        //            filterSingleRowByFilterRules(Utils.eFormNames.FormHighlighFilter, row);
+        //        }
+        //        if (!m_IncludeFilterDict.Count.Equals(0) || !m_ExcludeFilterDict.Count.Equals(0))
+        //        {
+        //            filterSingleRowByFilterRules(Utils.eFormNames.FormColumnFilter, row);
+        //        }
+        //        if (row.Visible && autoScroll)
+        //            dataGridView1.FirstDisplayedCell = row.Cells[(int)Utils.eColumnNames.ImpersonationLevel];
+        //        this.m_TotalNumberOfEvents += 1;
+        //        //this.toolStripStatusLabelTotalEvents.Text = "Total events: " + this.m_TotalNumberOfEvents;
+        //    }
+        //}
+
+        private void setProcessName(EventWrapper i_Event, ref DataGridViewRow row)
         {
             if (i_Event.ProcessName == "")
             {
@@ -1315,6 +1394,11 @@ namespace RPCMon
 
         private void Form1_Resize(object sender, EventArgs e)
         {
+            Center_Picture();
+        }
+
+        private void Center_Picture()
+        {
             int x = (this.ClientSize.Width - pictureBox1.Width) / 2;
             int y = (this.ClientSize.Height - pictureBox1.Height) / 2;
 
@@ -1345,6 +1429,58 @@ namespace RPCMon
                     e.Effect = DragDropEffects.None;
                 }
             }
+        }
+
+        private void showClientStartToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_IncludeEvents[(int)Utils.eEvents.ClientStart])
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ClientStart] = false;
+            }
+            else
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ClientStart] = true;
+            }
+            optionsToolStripMenuItem.DropDown.Show();
+        }
+
+        private void showServerStartToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_IncludeEvents[(int)Utils.eEvents.ServerStart])
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ServerStart] = false;
+            }
+            else
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ServerStart] = true;
+            }
+            optionsToolStripMenuItem.DropDown.Show();
+        }
+
+        private void showClientStopToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_IncludeEvents[(int)Utils.eEvents.ClientStop])
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ClientStop] = false;
+            }
+            else
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ClientStop] = true;
+            }
+            optionsToolStripMenuItem.DropDown.Show();
+        }
+
+        private void showServerStopToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_IncludeEvents[(int)Utils.eEvents.ServerStop])
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ServerStop] = false;
+            }
+            else
+            {
+                m_IncludeEvents[(int)Utils.eEvents.ServerStop] = true;
+            }
+            optionsToolStripMenuItem.DropDown.Show();
         }
 
         private void updateToolStripStatusLabelDBPath(string i_DBPath)

@@ -48,6 +48,7 @@ namespace RPCMon
             this.checkBoxProceduresCount.Checked = visableColumns.Contains("ProceduresCount");
             this.checkBoxFunction.Checked = visableColumns.Contains("Function");
             this.checkBoxTimeStamp.Checked = visableColumns.Contains("TimeStamp");
+            this.checkBoxTaskName.Checked = visableColumns.Contains("TaskName");
         }
 
         public virtual void OnselectColumnsUpdate(GroupBox i_RPCClient, GroupBox i_RPCServer, GroupBox i_RPCMisc)

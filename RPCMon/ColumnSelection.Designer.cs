@@ -36,6 +36,7 @@ namespace RPCMon
             this.checkBoxPID = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxRPC = new System.Windows.Forms.GroupBox();
+            this.checkBoxTimeStamp = new System.Windows.Forms.CheckBox();
             this.checkBoxImpersonationLevel = new System.Windows.Forms.CheckBox();
             this.checkBoxAuthenticationLevel = new System.Windows.Forms.CheckBox();
             this.checkBoxAuthenticationService = new System.Windows.Forms.CheckBox();
@@ -52,7 +53,7 @@ namespace RPCMon
             this.checkBoxModulePath = new System.Windows.Forms.CheckBox();
             this.checkBoxModule = new System.Windows.Forms.CheckBox();
             this.checkBoxProceduresCount = new System.Windows.Forms.CheckBox();
-            this.checkBoxTimeStamp = new System.Windows.Forms.CheckBox();
+            this.checkBoxTaskName = new System.Windows.Forms.CheckBox();
             this.groupBoxProcessManagement.SuspendLayout();
             this.groupBoxRPC.SuspendLayout();
             this.groupBoxRPCServer.SuspendLayout();
@@ -111,6 +112,7 @@ namespace RPCMon
             // 
             // groupBoxRPC
             // 
+            this.groupBoxRPC.Controls.Add(this.checkBoxTaskName);
             this.groupBoxRPC.Controls.Add(this.checkBoxTimeStamp);
             this.groupBoxRPC.Controls.Add(this.checkBoxImpersonationLevel);
             this.groupBoxRPC.Controls.Add(this.checkBoxAuthenticationLevel);
@@ -121,10 +123,20 @@ namespace RPCMon
             this.groupBoxRPC.Controls.Add(this.checkBoxNetworkAddress);
             this.groupBoxRPC.Location = new System.Drawing.Point(12, 253);
             this.groupBoxRPC.Name = "groupBoxRPC";
-            this.groupBoxRPC.Size = new System.Drawing.Size(272, 122);
+            this.groupBoxRPC.Size = new System.Drawing.Size(272, 143);
             this.groupBoxRPC.TabIndex = 3;
             this.groupBoxRPC.TabStop = false;
             this.groupBoxRPC.Text = "RPC Misc";
+            // 
+            // checkBoxTimeStamp
+            // 
+            this.checkBoxTimeStamp.AutoSize = true;
+            this.checkBoxTimeStamp.Location = new System.Drawing.Point(132, 97);
+            this.checkBoxTimeStamp.Name = "checkBoxTimeStamp";
+            this.checkBoxTimeStamp.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxTimeStamp.TabIndex = 9;
+            this.checkBoxTimeStamp.Text = "TimeStamp";
+            this.checkBoxTimeStamp.UseVisualStyleBackColor = true;
             // 
             // checkBoxImpersonationLevel
             // 
@@ -218,7 +230,7 @@ namespace RPCMon
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(113, 391);
+            this.buttonOK.Location = new System.Drawing.Point(113, 402);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 4;
@@ -228,7 +240,7 @@ namespace RPCMon
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(209, 391);
+            this.buttonCancel.Location = new System.Drawing.Point(205, 402);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -291,21 +303,21 @@ namespace RPCMon
             this.checkBoxProceduresCount.Text = "ProceduresCount";
             this.checkBoxProceduresCount.UseVisualStyleBackColor = true;
             // 
-            // checkBoxTimeStamp
+            // checkBoxTaskName
             // 
-            this.checkBoxTimeStamp.AutoSize = true;
-            this.checkBoxTimeStamp.Location = new System.Drawing.Point(132, 97);
-            this.checkBoxTimeStamp.Name = "checkBoxTimeStamp";
-            this.checkBoxTimeStamp.Size = new System.Drawing.Size(79, 17);
-            this.checkBoxTimeStamp.TabIndex = 9;
-            this.checkBoxTimeStamp.Text = "TimeStamp";
-            this.checkBoxTimeStamp.UseVisualStyleBackColor = true;
+            this.checkBoxTaskName.AutoSize = true;
+            this.checkBoxTaskName.Location = new System.Drawing.Point(8, 120);
+            this.checkBoxTaskName.Name = "checkBoxTaskName";
+            this.checkBoxTaskName.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxTaskName.TabIndex = 10;
+            this.checkBoxTaskName.Text = "TaskName";
+            this.checkBoxTaskName.UseVisualStyleBackColor = true;
             // 
             // ColumnSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 425);
+            this.ClientSize = new System.Drawing.Size(292, 437);
             this.Controls.Add(this.groupBoxRPCServer);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -353,5 +365,6 @@ namespace RPCMon
         private System.Windows.Forms.CheckBox checkBoxModule;
         private System.Windows.Forms.CheckBox checkBoxProceduresCount;
         private System.Windows.Forms.CheckBox checkBoxTimeStamp;
+        private System.Windows.Forms.CheckBox checkBoxTaskName;
     }
 }

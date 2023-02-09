@@ -30,7 +30,16 @@ namespace RPCMon
             AuthenticationService,
             ImpersonationLevel,
             TimeStamp,
+            Task,
 
+        }
+
+        public enum eEvents
+        {
+            ClientStart = 0,
+            ServerStart,
+            ClientStop,
+            ServerStop,
         }
 
         public enum eFilterNames
