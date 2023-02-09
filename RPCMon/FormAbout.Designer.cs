@@ -43,7 +43,7 @@ namespace RPCMon
             this.textBox1.Size = new System.Drawing.Size(318, 122);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Authors: Eviatar Gerzi (@g3rzi), Yaniv Yakobovich\r\n\r\nContributers: Natan Tunik\r\n\r" +
-    "\nVersion: 1.0\r\n\r\n\r\n\r\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserv" +
+    "\nVersion: 1.2.0\r\n\r\n\r\n\r\nCopyright (c) 2022 CyberArk Software Ltd. All rights reserv" +
     "ed\r\n\r\n";
             // 
             // linkLabel1
