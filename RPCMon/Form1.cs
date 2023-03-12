@@ -25,6 +25,7 @@ namespace RPCMon
     public partial class Form1 : Form
     {
         TraceEventSession m_TraceSession;
+        private Tuple<String, String> m_RightClickContent;
         private static Dictionary<int, string> m_ProcessPIDsDictionary = new Dictionary<int, string>();
         private string m_RPCDBPath = "";
         private static Dictionary<string, Dictionary<string, dynamic>> m_RPCDB;
@@ -1021,11 +1022,73 @@ namespace RPCMon
                 m_CurrentColumnIndexRightClick = e.ColumnIndex;
                 contextMenuStripRightClickGridView.Show(Cursor.Position.X, Cursor.Position.Y);
                 autoScroll = false;
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    m_RightClickContent = new Tuple<string, string>(dataGridView1.Columns[e.ColumnIndex].Name.Remove(0, 6), dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    ToolStripItem[] items = createNewToolStripMenuItem(e.RowIndex, e.ColumnIndex);
+                }
                 toolStripButtonAutoScroll.Image = global::RPCMon.Properties.Resources.scroll_disable;
             }
         }
 
-        private void copyRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private ToolStripItem[] createNewToolStripMenuItem(int rowIndex, int columnIndex)
+        {
+            string cellValue = dataGridView1.Rows[rowIndex].Cells[columnIndex].Value.ToString();
+            ToolStripItem[] items = new ToolStripMenuItem[3];
+            ToolStripSeparator separator = new ToolStripSeparator();
+            contextMenuStripRightClickGridView.Items.Add(separator);
+            items[0] = new ToolStripMenuItem("Include " + cellValue);
+            items[1] = new ToolStripMenuItem("Exclude " + cellValue);
+            items[2] = new ToolStripMenuItem("Highlight " + cellValue);
+            items[0].Name = "Include";
+            items[1].Name = "Exclude";
+            items[2].Name = "Highlight";
+            items[0].Click += new EventHandler(includeFromStripMenu);
+            items[1].Click += new EventHandler(excludeFromStripMenu);
+            items[2].Click += new EventHandler(highlightFromStripMenu);
+            foreach (var item in items)
+            {
+                contextMenuStripRightClickGridView.Items.Add(item);
+            }
+            return items;
+        }
+
+
+        private void highlightFromStripMenu(object sender, EventArgs e)
+        {
+            addItemToFilterListView("Highlight");
+        }
+        private void excludeFromStripMenu(object sender, EventArgs e)
+        {
+            addItemToFilterListView("Exclude");
+        }
+        private void includeFromStripMenu(object sender, EventArgs e)
+        {
+            addItemToFilterListView("Include");
+        }
+
+        private void addItemToFilterListView(string option)
+        {
+            ListViewItem item = new ListViewItem(m_RightClickContent.Item1);
+            item.SubItems.Add("is");
+            item.SubItems.Add(m_RightClickContent.Item2);
+            item.Checked = true;
+            item.SubItems.Add("True");
+            if (!option.Equals("Highlight"))
+            {
+                item.SubItems.Add(option);
+                m_filterListView.Items.Add(item);
+                ColumnFilter_OKFilter(m_filterListView);
+            }
+            else
+            {
+                item.SubItems.Add("Include");
+                m_highLightListView.Items.Add(item);
+                HightlightWindow_hightlightRowsUpdate(m_highLightListView);
+            }
+        }
+
+            private void copyRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string copiedRow = "";
 
@@ -1481,6 +1544,18 @@ namespace RPCMon
                 m_IncludeEvents[(int)Utils.eEvents.ServerStop] = true;
             }
             optionsToolStripMenuItem.DropDown.Show();
+        }
+
+        private void contextMenuStripRightClickGridView_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            if(contextMenuStripRightClickGridView.Items.Count < 3)
+            {
+                return;
+            }
+            for (int i = 0; i < 4; ++i) 
+            {
+                contextMenuStripRightClickGridView.Items.RemoveAt(2);
+            }
         }
 
         private void updateToolStripStatusLabelDBPath(string i_DBPath)
