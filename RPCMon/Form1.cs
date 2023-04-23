@@ -1012,9 +1012,9 @@ namespace RPCMon
         /// <param name="e"></param>
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(e.ColumnIndex.Equals(-1) && e.RowIndex.Equals(-1))
+            if(e.ColumnIndex.Equals(-1) || e.RowIndex.Equals(-1))
             {
-                dataGridView1_ColumnHeaderMouseClick(sender, e);
+                return;
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
