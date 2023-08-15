@@ -103,7 +103,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(828, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(828, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -114,13 +114,13 @@
             this.importToolStripMenuItem,
             this.importToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.saveToolStripMenuItem.Text = "Save...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -130,27 +130,27 @@
             this.importAllDataToolStripMenuItem,
             this.importAsIsToolStripMenuItem});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.importToolStripMenuItem.Text = "Export";
             // 
             // importAllDataToolStripMenuItem
             // 
             this.importAllDataToolStripMenuItem.Name = "importAllDataToolStripMenuItem";
-            this.importAllDataToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.importAllDataToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.importAllDataToolStripMenuItem.Text = "Export All Data...";
             this.importAllDataToolStripMenuItem.Click += new System.EventHandler(this.exportAllDataToolStripMenuItem_Click);
             // 
             // importAsIsToolStripMenuItem
             // 
             this.importAsIsToolStripMenuItem.Name = "importAsIsToolStripMenuItem";
-            this.importAsIsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.importAsIsToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.importAsIsToolStripMenuItem.Text = "Export As Is...";
             this.importAsIsToolStripMenuItem.Click += new System.EventHandler(this.exportAsIsToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem1
             // 
             this.importToolStripMenuItem1.Name = "importToolStripMenuItem1";
-            this.importToolStripMenuItem1.Size = new System.Drawing.Size(119, 22);
+            this.importToolStripMenuItem1.Size = new System.Drawing.Size(146, 26);
             this.importToolStripMenuItem1.Text = "Import...";
             this.importToolStripMenuItem1.Click += new System.EventHandler(this.importToolStripMenuItem1_Click);
             // 
@@ -160,20 +160,20 @@
             this.loadDBToolStripMenuItemLoadDB,
             this.buildDBToolStripMenuItem});
             this.dBToolStripMenuItem.Name = "dBToolStripMenuItem";
-            this.dBToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
+            this.dBToolStripMenuItem.Size = new System.Drawing.Size(43, 24);
             this.dBToolStripMenuItem.Text = "DB";
             // 
             // loadDBToolStripMenuItemLoadDB
             // 
             this.loadDBToolStripMenuItemLoadDB.Name = "loadDBToolStripMenuItemLoadDB";
-            this.loadDBToolStripMenuItemLoadDB.Size = new System.Drawing.Size(128, 22);
+            this.loadDBToolStripMenuItemLoadDB.Size = new System.Drawing.Size(159, 26);
             this.loadDBToolStripMenuItemLoadDB.Text = "Load DB...";
             this.loadDBToolStripMenuItemLoadDB.Click += new System.EventHandler(this.loadDBToolStripMenuItemLoadDB_Click);
             // 
             // buildDBToolStripMenuItem
             // 
             this.buildDBToolStripMenuItem.Name = "buildDBToolStripMenuItem";
-            this.buildDBToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.buildDBToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.buildDBToolStripMenuItem.Text = "Build DB...";
             this.buildDBToolStripMenuItem.Click += new System.EventHandler(this.buildDBToolStripMenuItem_Click);
             // 
@@ -186,13 +186,13 @@
             this.showClientStopToolStripMenuItem,
             this.showServerStopToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // setDbgHelpFilePathToolStripMenuItem
             // 
             this.setDbgHelpFilePathToolStripMenuItem.Name = "setDbgHelpFilePathToolStripMenuItem";
-            this.setDbgHelpFilePathToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.setDbgHelpFilePathToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.setDbgHelpFilePathToolStripMenuItem.Text = "Set DbgHelp File Path...";
             this.setDbgHelpFilePathToolStripMenuItem.Click += new System.EventHandler(this.setDbgHelpFilePathToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.showClientStartToolStripMenuItem.CheckOnClick = true;
             this.showClientStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showClientStartToolStripMenuItem.Name = "showClientStartToolStripMenuItem";
-            this.showClientStartToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.showClientStartToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.showClientStartToolStripMenuItem.Text = "Show ClientStart";
             this.showClientStartToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showClientStartToolStripMenuItem_CheckedChanged);
             // 
@@ -212,7 +212,7 @@
             this.showServerStartToolStripMenuItem.CheckOnClick = true;
             this.showServerStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showServerStartToolStripMenuItem.Name = "showServerStartToolStripMenuItem";
-            this.showServerStartToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.showServerStartToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.showServerStartToolStripMenuItem.Text = "Show ServerStart";
             this.showServerStartToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showServerStartToolStripMenuItem_CheckedChanged);
             // 
@@ -220,7 +220,7 @@
             // 
             this.showClientStopToolStripMenuItem.CheckOnClick = true;
             this.showClientStopToolStripMenuItem.Name = "showClientStopToolStripMenuItem";
-            this.showClientStopToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.showClientStopToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.showClientStopToolStripMenuItem.Text = "Show ClientStop";
             this.showClientStopToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showClientStopToolStripMenuItem_CheckedChanged);
             // 
@@ -228,7 +228,7 @@
             // 
             this.showServerStopToolStripMenuItem.CheckOnClick = true;
             this.showServerStopToolStripMenuItem.Name = "showServerStopToolStripMenuItem";
-            this.showServerStopToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.showServerStopToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.showServerStopToolStripMenuItem.Text = "Show ServerStop";
             this.showServerStopToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showServerStopToolStripMenuItem_CheckedChanged);
             // 
@@ -237,13 +237,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -259,7 +259,7 @@
             this.toolStripButtonGrid,
             this.toolStripButtonRemoveDuplicate,
             this.toolStripButtonAutoScroll});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(828, 27);
             this.toolStrip1.TabIndex = 1;
@@ -271,7 +271,7 @@
             this.toolStripButtonStart.Image = global::RPCMon.Properties.Resources.startIcon;
             this.toolStripButtonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonStart.Name = "toolStripButtonStart";
-            this.toolStripButtonStart.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonStart.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonStart.Text = "Capture";
             this.toolStripButtonStart.ToolTipText = "Capture";
             this.toolStripButtonStart.Click += new System.EventHandler(this.toolStripButtonStart_Click);
@@ -282,7 +282,7 @@
             this.toolStripButtonClear.Image = global::RPCMon.Properties.Resources.eraser;
             this.toolStripButtonClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonClear.Name = "toolStripButtonClear";
-            this.toolStripButtonClear.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonClear.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonClear.Text = "Clear (Ctrl+X)";
             this.toolStripButtonClear.Click += new System.EventHandler(this.toolStripButtonClear_Click);
             // 
@@ -292,7 +292,7 @@
             this.toolStripButtonFilter.Image = global::RPCMon.Properties.Resources.filter;
             this.toolStripButtonFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFilter.Name = "toolStripButtonFilter";
-            this.toolStripButtonFilter.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonFilter.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonFilter.Text = "Filter (Ctrl+L)";
             this.toolStripButtonFilter.ToolTipText = "Filter (Ctrl+L)";
             this.toolStripButtonFilter.Click += new System.EventHandler(this.toolStripButtonFilter_Click);
@@ -303,7 +303,7 @@
             this.toolStripButtonFind.Image = global::RPCMon.Properties.Resources.find;
             this.toolStripButtonFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFind.Name = "toolStripButtonFind";
-            this.toolStripButtonFind.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonFind.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonFind.Text = "Find (Ctrl+F)";
             this.toolStripButtonFind.Click += new System.EventHandler(this.toolStripButtonFind_Click);
             // 
@@ -313,7 +313,7 @@
             this.toolStripButtonHighlight.Image = global::RPCMon.Properties.Resources.highlighter;
             this.toolStripButtonHighlight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonHighlight.Name = "toolStripButtonHighlight";
-            this.toolStripButtonHighlight.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonHighlight.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonHighlight.Text = "HighLight (Ctrl+H)";
             this.toolStripButtonHighlight.Click += new System.EventHandler(this.toolStripButtonHighlight_Click);
             // 
@@ -323,7 +323,7 @@
             this.toolStripButtonGrid.Image = global::RPCMon.Properties.Resources.grid_disable;
             this.toolStripButtonGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonGrid.Name = "toolStripButtonGrid";
-            this.toolStripButtonGrid.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonGrid.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonGrid.Text = "Show Grid";
             this.toolStripButtonGrid.Click += new System.EventHandler(this.toolStripButtonGrid_Click);
             // 
@@ -333,7 +333,7 @@
             this.toolStripButtonRemoveDuplicate.Image = global::RPCMon.Properties.Resources.duplicate_disable;
             this.toolStripButtonRemoveDuplicate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRemoveDuplicate.Name = "toolStripButtonRemoveDuplicate";
-            this.toolStripButtonRemoveDuplicate.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRemoveDuplicate.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonRemoveDuplicate.Text = "Remove Duplicate Rows";
             this.toolStripButtonRemoveDuplicate.Click += new System.EventHandler(this.toolStripButtonRemoveDuplicate_Click);
             // 
@@ -343,7 +343,7 @@
             this.toolStripButtonAutoScroll.Image = global::RPCMon.Properties.Resources.scroll_disable;
             this.toolStripButtonAutoScroll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAutoScroll.Name = "toolStripButtonAutoScroll";
-            this.toolStripButtonAutoScroll.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAutoScroll.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonAutoScroll.Text = "Auto Scroll";
             this.toolStripButtonAutoScroll.ToolTipText = "Auto Scroll";
             this.toolStripButtonAutoScroll.Click += new System.EventHandler(this.toolStripButtonAutoScroll_Click);
@@ -378,6 +378,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 51);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(828, 486);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.Visible = false;
@@ -389,6 +390,7 @@
             // 
             this.ColumnPID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColumnPID.HeaderText = "PID";
+            this.ColumnPID.MinimumWidth = 6;
             this.ColumnPID.Name = "ColumnPID";
             this.ColumnPID.ReadOnly = true;
             this.ColumnPID.Width = 79;
@@ -396,30 +398,35 @@
             // ColumnTID
             // 
             this.ColumnTID.HeaderText = "TID";
+            this.ColumnTID.MinimumWidth = 6;
             this.ColumnTID.Name = "ColumnTID";
             this.ColumnTID.ReadOnly = true;
             // 
             // ColumnProcessName
             // 
             this.ColumnProcessName.HeaderText = "ProcessName";
+            this.ColumnProcessName.MinimumWidth = 6;
             this.ColumnProcessName.Name = "ColumnProcessName";
             this.ColumnProcessName.ReadOnly = true;
             // 
             // ColumnUUID
             // 
             this.ColumnUUID.HeaderText = "UUID";
+            this.ColumnUUID.MinimumWidth = 6;
             this.ColumnUUID.Name = "ColumnUUID";
             this.ColumnUUID.ReadOnly = true;
             // 
             // ColumnModule
             // 
             this.ColumnModule.HeaderText = "Module";
+            this.ColumnModule.MinimumWidth = 6;
             this.ColumnModule.Name = "ColumnModule";
             this.ColumnModule.ReadOnly = true;
             // 
             // ColumnModulePath
             // 
             this.ColumnModulePath.HeaderText = "ModulePath";
+            this.ColumnModulePath.MinimumWidth = 6;
             this.ColumnModulePath.Name = "ColumnModulePath";
             this.ColumnModulePath.ReadOnly = true;
             this.ColumnModulePath.Visible = false;
@@ -427,6 +434,7 @@
             // ColumnProceduresCount
             // 
             this.ColumnProceduresCount.HeaderText = "ProceduresCount";
+            this.ColumnProceduresCount.MinimumWidth = 6;
             this.ColumnProceduresCount.Name = "ColumnProceduresCount";
             this.ColumnProceduresCount.ReadOnly = true;
             this.ColumnProceduresCount.Visible = false;
@@ -434,18 +442,21 @@
             // ColumnService
             // 
             this.ColumnService.HeaderText = "Service";
+            this.ColumnService.MinimumWidth = 6;
             this.ColumnService.Name = "ColumnService";
             this.ColumnService.ReadOnly = true;
             // 
             // ColumnFunction
             // 
             this.ColumnFunction.HeaderText = "Function";
+            this.ColumnFunction.MinimumWidth = 6;
             this.ColumnFunction.Name = "ColumnFunction";
             this.ColumnFunction.ReadOnly = true;
             // 
             // ColumnNetworkAddress
             // 
             this.ColumnNetworkAddress.HeaderText = "NetworkAddress";
+            this.ColumnNetworkAddress.MinimumWidth = 6;
             this.ColumnNetworkAddress.Name = "ColumnNetworkAddress";
             this.ColumnNetworkAddress.ReadOnly = true;
             this.ColumnNetworkAddress.Visible = false;
@@ -453,18 +464,21 @@
             // ColumnProtocol
             // 
             this.ColumnProtocol.HeaderText = "Protocol";
+            this.ColumnProtocol.MinimumWidth = 6;
             this.ColumnProtocol.Name = "ColumnProtocol";
             this.ColumnProtocol.ReadOnly = true;
             // 
             // ColumnEndpoint
             // 
             this.ColumnEndpoint.HeaderText = "Endpoint";
+            this.ColumnEndpoint.MinimumWidth = 6;
             this.ColumnEndpoint.Name = "ColumnEndpoint";
             this.ColumnEndpoint.ReadOnly = true;
             // 
             // ColumnOptions
             // 
             this.ColumnOptions.HeaderText = "Options";
+            this.ColumnOptions.MinimumWidth = 6;
             this.ColumnOptions.Name = "ColumnOptions";
             this.ColumnOptions.ReadOnly = true;
             this.ColumnOptions.Visible = false;
@@ -472,6 +486,7 @@
             // ColumnAuthenticationLevel
             // 
             this.ColumnAuthenticationLevel.HeaderText = "AuthenticationLevel";
+            this.ColumnAuthenticationLevel.MinimumWidth = 6;
             this.ColumnAuthenticationLevel.Name = "ColumnAuthenticationLevel";
             this.ColumnAuthenticationLevel.ReadOnly = true;
             this.ColumnAuthenticationLevel.Visible = false;
@@ -479,6 +494,7 @@
             // ColumnAuthenticationService
             // 
             this.ColumnAuthenticationService.HeaderText = "AuthenticationService";
+            this.ColumnAuthenticationService.MinimumWidth = 6;
             this.ColumnAuthenticationService.Name = "ColumnAuthenticationService";
             this.ColumnAuthenticationService.ReadOnly = true;
             this.ColumnAuthenticationService.Visible = false;
@@ -486,12 +502,14 @@
             // ColumnImpersonationLevel
             // 
             this.ColumnImpersonationLevel.HeaderText = "ImpersonationLevel";
+            this.ColumnImpersonationLevel.MinimumWidth = 6;
             this.ColumnImpersonationLevel.Name = "ColumnImpersonationLevel";
             this.ColumnImpersonationLevel.ReadOnly = true;
             // 
             // ColumnTimeStamp
             // 
             this.ColumnTimeStamp.HeaderText = "TimeStamp";
+            this.ColumnTimeStamp.MinimumWidth = 6;
             this.ColumnTimeStamp.Name = "ColumnTimeStamp";
             this.ColumnTimeStamp.ReadOnly = true;
             this.ColumnTimeStamp.Visible = false;
@@ -499,6 +517,7 @@
             // ColumnTaskName
             // 
             this.ColumnTaskName.HeaderText = "TaskName";
+            this.ColumnTaskName.MinimumWidth = 6;
             this.ColumnTaskName.Name = "ColumnTaskName";
             this.ColumnTaskName.ReadOnly = true;
             // 
@@ -509,9 +528,9 @@
             this.toolStripStatusLabelTotalEvents,
             this.selectedEventsToolStrip,
             this.toolStripStatusLabelDBPath});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 538);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 532);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(828, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(828, 30);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -519,19 +538,19 @@
             // 
             this.toolStripStatusLabelTotalEvents.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabelTotalEvents.Name = "toolStripStatusLabelTotalEvents";
-            this.toolStripStatusLabelTotalEvents.Size = new System.Drawing.Size(107, 19);
+            this.toolStripStatusLabelTotalEvents.Size = new System.Drawing.Size(132, 24);
             this.toolStripStatusLabelTotalEvents.Text = "Shown events: 0/0";
             // 
             // selectedEventsToolStrip
             // 
             this.selectedEventsToolStrip.Name = "selectedEventsToolStrip";
-            this.selectedEventsToolStrip.Size = new System.Drawing.Size(100, 19);
+            this.selectedEventsToolStrip.Size = new System.Drawing.Size(127, 24);
             this.selectedEventsToolStrip.Text = "Selected events: 0";
             // 
             // toolStripStatusLabelDBPath
             // 
             this.toolStripStatusLabelDBPath.Name = "toolStripStatusLabelDBPath";
-            this.toolStripStatusLabelDBPath.Size = new System.Drawing.Size(49, 19);
+            this.toolStripStatusLabelDBPath.Size = new System.Drawing.Size(63, 24);
             this.toolStripStatusLabelDBPath.Text = "DB File: ";
             this.toolStripStatusLabelDBPath.MouseLeave += new System.EventHandler(this.toolStripStatusLabelDBPath_MouseLeave);
             this.toolStripStatusLabelDBPath.MouseHover += new System.EventHandler(this.toolStripStatusLabelDBPath_MouseHover);
@@ -543,20 +562,20 @@
             this.copyRowToolStripMenuItem,
             this.copyCellToolStripMenuItem});
             this.contextMenuStripRightClickGridView.Name = "contextMenuStripRightClickGridView";
-            this.contextMenuStripRightClickGridView.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStripRightClickGridView.Size = new System.Drawing.Size(146, 52);
             this.contextMenuStripRightClickGridView.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuStripRightClickGridView_Closing);
             // 
             // copyRowToolStripMenuItem
             // 
             this.copyRowToolStripMenuItem.Name = "copyRowToolStripMenuItem";
-            this.copyRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyRowToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
             this.copyRowToolStripMenuItem.Text = "Copy Row";
             this.copyRowToolStripMenuItem.Click += new System.EventHandler(this.copyRowToolStripMenuItem_Click);
             // 
             // copyCellToolStripMenuItem
             // 
             this.copyCellToolStripMenuItem.Name = "copyCellToolStripMenuItem";
-            this.copyCellToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyCellToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
             this.copyCellToolStripMenuItem.Text = "Copy Cell";
             this.copyCellToolStripMenuItem.Click += new System.EventHandler(this.copyCellToolStripMenuItem_Click);
             // 
