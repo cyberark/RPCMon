@@ -24,6 +24,15 @@ namespace RPCMon
 {
     public partial class Form1 : Form
     {
+        private ColumnFilter m_FormColumnFilter;
+        private FormHighlighting m_FormHightlightWindow;
+        private FormSearch m_FormFindWindow;
+
+        private bool m_IsColumnFilterFormOpen = false;
+        private bool m_IsHighlightFormOpen = false;
+        private bool m_IsFindFormOpen = false;
+
+
         TraceEventSession m_TraceSession;
         private Tuple<String, String> m_RightClickContent;
         private static Dictionary<int, string> m_ProcessPIDsDictionary = new Dictionary<int, string>();
@@ -54,7 +63,8 @@ namespace RPCMon
         private IDictionary<string, List<ListViewItem>> m_ExcludeFilterDict = new Dictionary<string, List<ListViewItem>>();
         private IDictionary<string, List<ListViewItem>> m_IncludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
         private IDictionary<string, List<ListViewItem>> m_ExcludeHighlightDict = new Dictionary<string, List<ListViewItem>>();
-        private bool[] m_IncludeEvents = { true, true, false, false }; 
+        private bool[] m_IncludeEvents = { true, true, false, false };
+
 
         public Form1()
         {
@@ -123,7 +133,6 @@ namespace RPCMon
         private void timer1_Tick(object sender, EventArgs e)
         {
             updatetoolStripStatusLabelTotalEvents();
-            
         }
 
         private void updatetoolStripStatusLabelTotalEvents()
@@ -532,7 +541,7 @@ namespace RPCMon
             {
                 dataGridView1.Visible = true;
                 pictureBox1.Visible = false;
-                toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
+                    toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
                 m_IsCaptureButtonPressed = true;
                 m_CaptureThread = new Thread(new ThreadStart(startEventTracing));
                 m_CaptureThread.Start();
@@ -578,16 +587,30 @@ namespace RPCMon
 
         private void openColumnFilterWindow()
         {
-            //ColumnFilter columnFilter = new ColumnFilter(listView1);
-            // ColumnFilter columnFilter = new ColumnFilter(ref dataGridView1);
-            ColumnFilter columnFilter = new ColumnFilter(ref m_filterListView);
-            columnFilter.FilterOKUpdate += new FilterOKEventHandler(ColumnFilter_OKFilter);
-            columnFilter.ShowDialog();
+            if (!m_IsColumnFilterFormOpen)
+            {
+                //ColumnFilter m_FormColumnFilter = new ColumnFilter(listView1);
+                // ColumnFilter m_FormColumnFilter = new ColumnFilter(ref dataGridView1);
+                m_FormColumnFilter = new ColumnFilter(ref m_filterListView);
+                m_FormColumnFilter.FilterOKUpdate += new FilterOKEventHandler(ColumnFilter_OKFilter);
+                m_FormColumnFilter.FormClosed += columnFilter_FormClosed;
+                m_IsColumnFilterFormOpen = true;
+                m_FormColumnFilter.Show();
+            }
+            else
+            {
+                m_FormColumnFilter.Activate();
+            }
+        }
+
+        private void columnFilter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_IsColumnFilterFormOpen = false; // Reset the flag when the form is closed
         }
 
         private void openColumnSelectionWindow()
         {
-            //ColumnFilter columnFilter = new ColumnFilter(listView1);
+            //ColumnFilter m_FormColumnFilter = new ColumnFilter(listView1);
             ColumnSelection columnSelection = new ColumnSelection(dataGridView1);
             columnSelection.selectColumnsUpdate += new selectColumnsEventHandler(this.ColumnSelection_selectColumnsUpdate);
             columnSelection.ShowDialog();
@@ -595,28 +618,57 @@ namespace RPCMon
 
         private void openFindWindow()
         {
-            FormSearch findWindow = new FormSearch();
-            findWindow.searchForMatch += new searchEventHandler(FindWindow_searchForMatch);
-            findWindow.ShowDialog();
+            if (!m_IsFindFormOpen)
+            {
+                m_FormFindWindow = new FormSearch();
+                m_FormFindWindow.searchForMatch += new searchEventHandler(FindWindow_searchForMatch);
+                m_FormFindWindow.FormClosed += findWindow_FormClosed;
+                m_IsFindFormOpen = true;
+                m_FormFindWindow.Show();
+            }
+            else
+            {
+                m_FormFindWindow.Activate();
+            }
+        }
+
+        private void findWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_IsFindFormOpen = false;
         }
 
         private void openHighlightWindows()
         {
-            FormHighlighting hightlightWindow = new FormHighlighting(ref m_highLightListView);
-            hightlightWindow.hightlightRowsUpdate += HightlightWindow_hightlightRowsUpdate;
-            hightlightWindow.ShowDialog();
+            if (!m_IsHighlightFormOpen)
+            {
+                m_FormHightlightWindow = new FormHighlighting(ref m_highLightListView);
+                m_FormHightlightWindow.hightlightRowsUpdate += HightlightWindow_hightlightRowsUpdate;
+                m_FormHightlightWindow.FormClosed += hightlight_FormClosed;
+                m_IsHighlightFormOpen = true;
+                m_FormHightlightWindow.Show();
+            }
+            else
+            {
+                m_FormHightlightWindow.Activate();
+            }
         }
+
+        private void hightlight_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            m_IsHighlightFormOpen = false; // Reset the flag when the form is closed
+        }
+
 
         private void buildDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBuildDB buildDBForm = new FormBuildDB();
-            //hightlightWindow.hightlightRowsUpdate += HightlightWindow_hightlightRowsUpdate;
+            //m_FormHightlightWindow.hightlightRowsUpdate += HightlightWindow_hightlightRowsUpdate;
             buildDBForm.ShowDialog();
         }
 
         private void HightlightWindow_hightlightRowsUpdate(ListView i_ListView)
         {
-            m_highLightListView = i_ListView;
+            m_highLightListView = Utils.CopyListView(i_ListView);
             updateFilterDicts(i_ListView, Utils.eFormNames.FormHighlighFilter);
             if (m_IncludeHighlightDict.Count.Equals(0))
             {
@@ -927,8 +979,7 @@ namespace RPCMon
 
         private void ColumnFilter_OKFilter(ListView i_ListView)
         {
-
-            m_filterListView = i_ListView;
+            m_filterListView = Utils.CopyListView(i_ListView);
             updateFilterDicts(i_ListView, Utils.eFormNames.FormColumnFilter);
             if (m_IncludeFilterDict.Count.Equals(0))
             {
