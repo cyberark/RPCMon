@@ -541,7 +541,7 @@ namespace RPCMon
             {
                 dataGridView1.Visible = true;
                 pictureBox1.Visible = false;
-                    toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
+                toolStripButtonStart.Image = global::RPCMon.Properties.Resources.pause_button;
                 m_IsCaptureButtonPressed = true;
                 m_CaptureThread = new Thread(new ThreadStart(startEventTracing));
                 m_CaptureThread.Start();
