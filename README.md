@@ -17,6 +17,11 @@ Double click the EXE binary with **Admin privileges** ("Run As Administrator") a
 RPCMon needs a DB to be able to get the details on the RPC functions, without a DB you will have missing information.   
 To load the DB, press on `DB -> Load DB...` and choose your DB. You can a DB we added to this project: `/DB/RPC_UUID_Map_Windows10_1909_18363.1977.rpcdb.json`.  
 
+## Build
+When downloading it from GitHub you might get error of block files, you can use PowerShell to unblock them:  
+```pwoershell
+Get-ChildItem -Path 'D:\tmp\PipeViewer-main' -Recurse | Unblock-File
+```
 ## Features
 * A detailed overview of RPC functions activity.
 * Build an RPC database to parse RPC modules or use hardcoded database.
