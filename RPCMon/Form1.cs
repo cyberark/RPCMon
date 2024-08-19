@@ -369,10 +369,10 @@ namespace RPCMon
         {
             if (m_RPCDB.ContainsKey(i_UUID))
             {
-                i_Row.Cells[(int)Utils.eColumnNames.Module].Value = m_RPCDB[i_UUID][RPC_DB_KEY_Module];
-                i_Row.Cells[(int)Utils.eColumnNames.ModulePath].Value = m_RPCDB[i_UUID][RPC_DB_KEY_ModulePath];
-                i_Row.Cells[(int)Utils.eColumnNames.ProceduresCount].Value = m_RPCDB[i_UUID][RPC_DB_KEY_ProceduresCount];
-                i_Row.Cells[(int)Utils.eColumnNames.Service].Value = m_RPCDB[i_UUID][RPC_DB_KEY_Service];
+                i_Row.Cells[(int)Utils.eColumnNames.Module].Value = m_RPCDB[i_UUID][RPC_DB_KEY_Module] ?? NA_STRING;
+                i_Row.Cells[(int)Utils.eColumnNames.ModulePath].Value = m_RPCDB[i_UUID][RPC_DB_KEY_ModulePath] ?? NA_STRING;
+                i_Row.Cells[(int)Utils.eColumnNames.ProceduresCount].Value = m_RPCDB[i_UUID][RPC_DB_KEY_ProceduresCount] ?? NA_STRING;
+                i_Row.Cells[(int)Utils.eColumnNames.Service].Value = m_RPCDB[i_UUID][RPC_DB_KEY_Service] ?? NA_STRING;
             }
             else
             {
